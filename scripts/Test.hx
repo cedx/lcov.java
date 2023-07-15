@@ -1,3 +1,6 @@
 /** Runs the test suite. **/
-function main()
-	Sys.command("javac -d bin -g src/io/belin/lcov/*.java test/io/belin/lcov/*.java");
+function main() {
+	Tools.setClassPath();
+	Sys.command("lix Build --debug");
+	Sys.command("java org.junit.platform.console.ConsoleLauncher --scan-class-path=bin");
+}

@@ -4,7 +4,6 @@
 		<description homepage="https://docs.belin.io/lcov.java">
 			Parse and format to LCOV your code coverage reports.
 		</description>
-		<!--TODO<license name="MIT"/>-->
 	</info>
 	<dependencies>
 		<dependency org="org.eclipse" name="yasson" rev="3.0.3"/>

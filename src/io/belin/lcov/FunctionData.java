@@ -36,7 +36,7 @@ public class FunctionData {
 	public FunctionData(String functionName, int lineNumber, int executionCount) {
 		this.executionCount = executionCount;
 		this.functionName = functionName;
-		this.executionCount = executionCount;
+		this.lineNumber = lineNumber;
 	}
 
 	/**
