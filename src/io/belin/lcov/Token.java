@@ -1,5 +1,8 @@
 package io.belin.lcov;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 /**
  * Provides the list of tokens supported by the parser.
  */
@@ -71,16 +74,25 @@ public enum Token {
 	testName("TN");
 
 	/**
-	 * The token value.
+	 * The token identifier.
 	 */
-	private final String value;
+	private final String id;
 
 	/**
 	 * Creates a new token.
-	 * @param value The token value.
+	 * @param id The token identifier.
 	 */
-	private Token(String value) {
-		this.value = value;
+	private Token(String id) {
+		this.id = id;
+	}
+
+	/**
+	 * Creates a new token from the specified identifier.
+	 * @param id A string specifying a token identifier.
+	 * @return The optional token corresponding to the specified identifier.
+	 */
+	public static Optional<Token> from(String id) {
+		return Arrays.stream(values()).filter(value -> value.id.equals(id)).findFirst();
 	}
 
 	/**
@@ -88,6 +100,6 @@ public enum Token {
 	 * @return The string representation of this object.
 	 */
 	@Override public String toString() {
-		return value;
+		return id;
 	}
 }
