@@ -1,7 +1,7 @@
 package io.belin.lcov;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -13,7 +13,7 @@ public class FunctionCoverage {
 	/**
 	 * The coverage data.
 	 */
-	public List<FunctionData> data;
+	public ArrayList<FunctionData> data;
 
 	/**
 	 * The number of functions found.
@@ -29,7 +29,7 @@ public class FunctionCoverage {
 	 * Creates a new function coverage.
 	 */
 	public FunctionCoverage() {
-		this(0, 0, new FunctionData[0]);
+		this(0, 0);
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class FunctionCoverage {
 	 * @param data The coverage data.
 	 */
 	public FunctionCoverage(int found, int hit, FunctionData[] data) {
-		this.data = Arrays.asList(data);
+		this.data = new ArrayList<>(Arrays.asList(data));
 		this.found = found;
 		this.hit = hit;
 	}

@@ -1,7 +1,7 @@
 package io.belin.lcov;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -13,7 +13,7 @@ public class BranchCoverage {
 	/**
 	 * The coverage data.
 	 */
-	public List<BranchData> data;
+	public ArrayList<BranchData> data;
 
 	/**
 	 * The number of branches found.
@@ -29,7 +29,7 @@ public class BranchCoverage {
 	 * Creates a new branch coverage.
 	 */
 	public BranchCoverage() {
-		this(0, 0, new BranchData[0]);
+		this(0, 0);
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class BranchCoverage {
 	 * @param data The coverage data.
 	 */
 	public BranchCoverage(int found, int hit, BranchData[] data) {
-		this.data = Arrays.asList(data);
+		this.data = new ArrayList<>(Arrays.asList(data));
 		this.found = found;
 		this.hit = hit;
 	}

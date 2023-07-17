@@ -29,7 +29,7 @@ public class BranchData {
 	 * Creates new branch data.
 	 */
 	public BranchData() {
-		this(0, 0, 0, 0);
+		this(0, 0, 0);
 	}
 
 	/**
