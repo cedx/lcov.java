@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 /**
  * Tests the features of the {@link BranchData} class.
  */
-public class BranchDataTest {
+class BranchDataTest {
 
 	/**
 	 * Tests the {@link BranchData#toString} method.
