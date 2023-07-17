@@ -58,7 +58,11 @@ public class FunctionCoverage {
 	 * @return The string representation of this object.
 	 */
 	@Override public String toString() {
-		var functions = data.stream().map(function -> function.toString());
+		var functions = Stream.concat(
+			data.stream().map(function -> function.toString(true)),
+			data.stream().map(function -> function.toString(false))
+		);
+
 		return Stream
 			.concat(functions, Stream.of(Token.functionsFound + ":" + found, Token.functionsHit + ":" + hit))
 			.collect(Collectors.joining(System.lineSeparator()));

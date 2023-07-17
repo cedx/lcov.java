@@ -1,17 +1,21 @@
 package io.belin.lcov;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests the features of the {@link LineCoverage} class.
  */
-public class LineCoverageTest {
+@DisplayName("LineCoverage")
+class LineCoverageTest {
 
 	/**
 	 * Tests the {@link LineCoverage#toString} method.
 	 */
-	@Test public void testToString() {
+	@Test
+	@DisplayName("toString()")
+	void testToString() {
 		var eol = System.lineSeparator();
 		assertEquals("LF:0{eol}LH:0".replace("{eol}", eol), new LineCoverage().toString());
 

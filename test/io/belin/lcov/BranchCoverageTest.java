@@ -1,17 +1,21 @@
 package io.belin.lcov;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests the features of the {@link BranchCoverage} class.
  */
-public class BranchCoverageTest {
+@DisplayName("BranchCoverage")
+class BranchCoverageTest {
 
 	/**
 	 * Tests the {@link BranchCoverage#toString} method.
 	 */
-	@Test public void testToString() {
+	@Test
+	@DisplayName("toString()")
+	void testToString() {
 		var eol = System.lineSeparator();
 		assertEquals("BRF:0{eol}BRH:0".replace("{eol}", eol), new BranchCoverage().toString());
 

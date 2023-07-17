@@ -58,7 +58,7 @@ public class LineCoverage {
 	 * @return The string representation of this object.
 	 */
 	@Override public String toString() {
-		var lines = data.stream().map(line -> line.toString());
+		var lines = data.stream().map(String::valueOf);
 		return Stream
 			.concat(lines, Stream.of(Token.linesFound + ":" + found, Token.linesHit + ":" + hit))
 			.collect(Collectors.joining(System.lineSeparator()));

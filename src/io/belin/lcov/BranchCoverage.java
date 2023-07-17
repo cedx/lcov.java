@@ -58,7 +58,7 @@ public class BranchCoverage {
 	 * @return The string representation of this object.
 	 */
 	@Override public String toString() {
-		var branches = data.stream().map(branch -> branch.toString());
+		var branches = data.stream().map(String::valueOf);
 		return Stream
 			.concat(branches, Stream.of(Token.branchesFound + ":" + found, Token.branchesHit + ":" + hit))
 			.collect(Collectors.joining(System.lineSeparator()));

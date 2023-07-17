@@ -1,7 +1,7 @@
 # LCOV Reports for Java
 ![Java](https://badgen.net/badge/java/%3E%3D17.0.0/green) ![Maven](https://badgen.net/maven/v/maven-central/io.belin/lcov) ![License](https://badgen.net/badge/license/MIT/blue) ![Coverage](https://badgen.net/codecov/c/github/cedx/lcov.java)
 
-Parse and format [LCOV](http://ltp.sourceforge.net/coverage/lcov.java) coverage reports,
+Parse and format [LCOV](http://ltp.sourceforge.net/coverage/lcov.php) coverage reports,
 in [Java](https://www.java.com).
 
 ## Documentation
