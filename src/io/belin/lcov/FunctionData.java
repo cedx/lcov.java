@@ -21,14 +21,14 @@ public class FunctionData {
 	public int lineNumber;
 
 	/**
-	 * Creates a new function data.
+	 * Creates new function data.
 	 */
 	public FunctionData() {
 		this("", 0, 0);
 	}
 
 	/**
-	 * Creates a new function data.
+	 * Creates new function data.
 	 * @param functionName The function name.
 	 * @param lineNumber The line number of the function start.
 	 * @param executionCount The execution count.

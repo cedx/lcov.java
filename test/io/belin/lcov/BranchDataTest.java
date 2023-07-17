@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 public class BranchDataTest {
 
 	/**
-	 * Tests the {@link FunctionData#toString} method.
+	 * Tests the {@link BranchData#toString} method.
 	 */
 	@ParameterizedTest
 	@CsvSource({

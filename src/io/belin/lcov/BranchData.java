@@ -26,14 +26,14 @@ public class BranchData {
 	public int taken;
 
 	/**
-	 * Creates a new branch data.
+	 * Creates new branch data.
 	 */
 	public BranchData() {
 		this(0, 0, 0, 0);
 	}
 
 	/**
-	 * Creates a new branch data.
+	 * Creates new branch data.
 	 * @param lineNumber The line number.
 	 * @param blockNumber The block number.
 	 * @param branchNumber The branch number.
@@ -43,7 +43,7 @@ public class BranchData {
 	}
 
 	/**
-	 * Creates a new branch data.
+	 * Creates new branch data.
 	 * @param lineNumber The line number.
 	 * @param blockNumber The block number.
 	 * @param branchNumber The branch number.
