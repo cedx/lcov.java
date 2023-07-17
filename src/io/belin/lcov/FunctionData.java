@@ -53,7 +53,7 @@ public class FunctionData {
 	 * @return The string representation of this object.
 	 */
 	public String toString(boolean asDefinition) {
-		var token = asDefinition ? Token.functionName : Token.functionData;
+		var token = asDefinition ? Token.FunctionName : Token.FunctionData;
 		var number = asDefinition ? lineNumber : executionCount;
 		return token + ":" + number + "," + functionName;
 	}

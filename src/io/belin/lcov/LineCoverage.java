@@ -60,7 +60,7 @@ public class LineCoverage {
 	@Override public String toString() {
 		var lines = data.stream().map(String::valueOf);
 		return Stream
-			.concat(lines, Stream.of(Token.linesFound + ":" + found, Token.linesHit + ":" + hit))
+			.concat(lines, Stream.of(Token.LinesFound + ":" + found, Token.LinesHit + ":" + hit))
 			.collect(Collectors.joining(System.lineSeparator()));
 	}
 }

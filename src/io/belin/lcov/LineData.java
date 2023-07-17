@@ -53,7 +53,7 @@ public class LineData {
 	 * @return The string representation of this object.
 	 */
 	@Override public String toString() {
-		var value = Token.lineData + ":" + lineNumber + "," + executionCount;
+		var value = Token.LineData + ":" + lineNumber + "," + executionCount;
 		return checksum.length() > 0 ? value + "," + checksum : value;
 	}
 }

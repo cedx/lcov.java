@@ -64,7 +64,7 @@ public class FunctionCoverage {
 		);
 
 		return Stream
-			.concat(functions, Stream.of(Token.functionsFound + ":" + found, Token.functionsHit + ":" + hit))
+			.concat(functions, Stream.of(Token.FunctionsFound + ":" + found, Token.FunctionsHit + ":" + hit))
 			.collect(Collectors.joining(System.lineSeparator()));
 	}
 }

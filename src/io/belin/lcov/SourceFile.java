@@ -61,10 +61,10 @@ public class SourceFile {
 	 * @return The string representation of this object.
 	 */
 	@Override public String toString() {
-		var joiner = new StringJoiner(System.lineSeparator()).add(Token.sourceFile + ":" + path);
+		var joiner = new StringJoiner(System.lineSeparator()).add(Token.SourceFile + ":" + path);
 		if (functions != null) joiner.add(functions.toString());
 		if (branches != null) joiner.add(branches.toString());
 		if (lines != null) joiner.add(lines.toString());
-		return joiner.add(Token.endOfRecord.toString()).toString();
+		return joiner.add(Token.EndOfRecord.toString()).toString();
 	}
 }

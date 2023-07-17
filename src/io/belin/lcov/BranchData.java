@@ -61,6 +61,6 @@ public class BranchData {
 	 * @return The string representation of this object.
 	 */
 	@Override public String toString() {
-		return Token.branchData + ":" + lineNumber + "," + blockNumber + "," + branchNumber + "," + (taken > 0 ? taken : "-");
+		return Token.BranchData + ":" + lineNumber + "," + blockNumber + "," + branchNumber + "," + (taken > 0 ? taken : "-");
 	}
 }
