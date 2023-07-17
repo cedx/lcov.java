@@ -16,5 +16,7 @@ function removeDirectory(directory: String) {
 }
 
 /** Sets the Java class path. **/
-function setClassPath()
-	Sys.putEnv("CLASSPATH", ["bin", File.getContent(".classpath").rtrim()].join(Sys.systemName() == "Windows" ? ";" : ":"));
+function setClassPath() {
+	final paths = (FileSystem.exists("bin") ? ["bin"] : []).concat([File.getContent(".classpath").rtrim()]);
+	Sys.putEnv("CLASSPATH", paths.join(Sys.systemName() == "Windows" ? ";" : ":"));
+}
