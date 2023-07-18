@@ -1,5 +1,5 @@
 # LCOV Reports for Java
-![Java](https://badgen.net/badge/java/%3E%3D17.0.0/green) ![Maven](https://badgen.net/maven/v/maven-central/io.belin/lcov) ![License](https://badgen.net/badge/license/MIT/blue) ![Coverage](https://badgen.net/codecov/c/github/cedx/lcov.java)
+![Java](https://badgen.net/badge/java/%3E%3D17.0.0/green) ![License](https://badgen.net/badge/license/MIT/blue) ![Coverage](https://badgen.net/codecov/c/github/cedx/lcov.java)
 
 Parse and format [LCOV](https://github.com/linux-test-project/lcov) coverage reports,
 in [Java](https://www.java.com).
@@ -10,7 +10,6 @@ in [Java](https://www.java.com).
 
 ## Development
 - [Git repository](https://github.com/cedx/lcov.java)
-- [Maven package](https://mvnrepository.com/artifact/io.belin/lcov)
 - [Submit an issue](https://github.com/cedx/lcov.java/issues)
 
 ## License
