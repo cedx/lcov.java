@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
  * Tests the features of the {@link SourceFile} class.
  */
 @DisplayName("SourceFile")
-class SourceFileTest {
+final class SourceFileTest {
 
 	/**
 	 * Tests the {@link SourceFile#toString} method.

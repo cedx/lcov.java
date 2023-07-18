@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
  * Tests the features of the {@link FunctionCoverage} class.
  */
 @DisplayName("FunctionCoverage")
-class FunctionCoverageTest {
+final class FunctionCoverageTest {
 
 	/**
 	 * Tests the {@link FunctionCoverage#toString} method.

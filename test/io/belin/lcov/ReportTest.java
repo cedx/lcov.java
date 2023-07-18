@@ -1,10 +1,8 @@
 package io.belin.lcov;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +10,7 @@ import org.junit.jupiter.api.Test;
  * Tests the features of the {@link Report} class.
  */
 @DisplayName("Report")
-class ReportTest {
+final class ReportTest {
 
 	/**
 	 * Tests the {@link Report#parse} method.

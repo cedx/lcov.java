@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
  * Tests the features of the {@link LineCoverage} class.
  */
 @DisplayName("LineCoverage")
-class LineCoverageTest {
+final class LineCoverageTest {
 
 	/**
 	 * Tests the {@link LineCoverage#toString} method.

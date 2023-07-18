@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource;
  * Tests the features of the {@link LineData} class.
  */
 @DisplayName("LineData")
-class LineDataTest {
+final class LineDataTest {
 
 	/**
 	 * Tests the {@link LineData#toString} method.

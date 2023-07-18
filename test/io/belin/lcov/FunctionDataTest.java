@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource;
  * Tests the features of the {@link FunctionData} class.
  */
 @DisplayName("FunctionData")
-class FunctionDataTest {
+final class FunctionDataTest {
 
 	/**
 	 * Tests the {@link FunctionData#toString} method.

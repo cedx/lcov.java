@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
  * Tests the features of the {@link BranchCoverage} class.
  */
 @DisplayName("BranchCoverage")
-class BranchCoverageTest {
+final class BranchCoverageTest {
 
 	/**
 	 * Tests the {@link BranchCoverage#toString} method.
