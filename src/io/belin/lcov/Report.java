@@ -2,6 +2,8 @@ package io.belin.lcov;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -32,7 +34,7 @@ public class Report {
 	 * @param testName The test name.
 	 */
 	public Report(String testName) {
-		this(testName, new SourceFile[0]);
+		this(testName, Collections.emptyList());
 	}
 
 	/**
@@ -40,8 +42,8 @@ public class Report {
 	 * @param testName The test name.
 	 * @param sourceFiles The source file list.
 	 */
-	public Report(String testName, SourceFile[] sourceFiles) {
-		this.sourceFiles = new ArrayList<>(Arrays.asList(sourceFiles));
+	public Report(String testName, List<SourceFile> sourceFiles) {
+		this.sourceFiles = new ArrayList<>(sourceFiles);
 		this.testName = testName;
 	}
 

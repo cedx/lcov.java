@@ -1,7 +1,8 @@
 package io.belin.lcov;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -38,7 +39,7 @@ public class LineCoverage {
 	 * @param hit The number of lines hit.
 	 */
 	public LineCoverage(int found, int hit) {
-		this(found, hit, new LineData[0]);
+		this(found, hit, Collections.emptyList());
 	}
 
 	/**
@@ -47,8 +48,8 @@ public class LineCoverage {
 	 * @param hit The number of lines hit.
 	 * @param data The coverage data.
 	 */
-	public LineCoverage(int found, int hit, LineData[] data) {
-		this.data = new ArrayList<>(Arrays.asList(data));
+	public LineCoverage(int found, int hit, List<LineData> data) {
+		this.data = new ArrayList<>(data);
 		this.found = found;
 		this.hit = hit;
 	}

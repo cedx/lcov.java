@@ -3,6 +3,7 @@ package io.belin.lcov;
 import static org.junit.jupiter.api.Assertions.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -66,7 +67,7 @@ final class ReportTest {
 		assertTrue(new Report().toString().isEmpty());
 
 		var sourceFile = new SourceFile();
-		var report = new Report("LcovTest", new SourceFile[] {sourceFile});
+		var report = new Report("LcovTest", List.of(sourceFile));
 		assertEquals("TN:LcovTest{eol}".replace("{eol}", eol) + sourceFile.toString(), report.toString());
 	}
 }
