@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -34,7 +35,7 @@ public class Report {
 	 * @param testName The test name.
 	 */
 	public Report(String testName) {
-		this(testName, Collections.emptyList());
+		this(testName, null);
 	}
 
 	/**
@@ -43,8 +44,8 @@ public class Report {
 	 * @param sourceFiles The source file list.
 	 */
 	public Report(String testName, List<SourceFile> sourceFiles) {
-		this.sourceFiles = new ArrayList<>(sourceFiles);
-		this.testName = testName;
+		this.sourceFiles = new ArrayList<>(Objects.requireNonNullElse(sourceFiles, Collections.emptyList()));
+		this.testName = Objects.requireNonNull(testName);
 	}
 
 	/**

@@ -1,5 +1,6 @@
 package io.belin.lcov;
 
+import java.util.Objects;
 import java.util.StringJoiner;
 
 /**
@@ -53,7 +54,7 @@ public class SourceFile {
 		this.branches = branches;
 		this.functions = functions;
 		this.lines = lines;
-		this.path = path;
+		this.path = Objects.requireNonNull(path);
 	}
 
 	/**

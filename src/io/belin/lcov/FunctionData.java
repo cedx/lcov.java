@@ -1,5 +1,7 @@
 package io.belin.lcov;
 
+import java.util.Objects;
+
 /**
  * Provides details for function coverage.
  */
@@ -35,7 +37,7 @@ public class FunctionData {
 	 */
 	public FunctionData(String functionName, int lineNumber, int executionCount) {
 		this.executionCount = executionCount;
-		this.functionName = functionName;
+		this.functionName = Objects.requireNonNull(functionName);
 		this.lineNumber = lineNumber;
 	}
 
