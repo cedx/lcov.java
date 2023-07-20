@@ -1,6 +1,7 @@
 package io.belin.lcov;
 
 import static org.junit.jupiter.api.Assertions.*;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -18,10 +19,8 @@ final class ReportTest {
 	 */
 	@Test
 	@DisplayName("parse()")
-	void parse() {
-		Report report = null;
-		try { report = Report.parse(Files.readString(Path.of("share/lcov.info"))); }
-		catch (Exception e) { fail(e); }
+	void parse() throws IOException {
+		var report = Report.parse(Files.readString(Path.of("share/lcov.info")));
 
 		// It should have a test name.
 		assertEquals("Example", report.testName);
