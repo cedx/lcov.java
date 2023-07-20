@@ -27,6 +27,7 @@ jobs:
         run: |
           lix download
           java -jar var/ivy-2.5.1.jar -cache lib -cachepath .classpath
+      - run: ls -la
       - name: Run tests
         run: lix Test
       - name: Collect code coverage
