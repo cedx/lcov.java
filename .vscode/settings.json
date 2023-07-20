@@ -4,8 +4,7 @@
 	"files.encoding": "utf8",
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
-	"java.project.outputPath": "bin",
-	"java.project.referencedLibraries": ["lib/**/*.jar"],
+	"java.project.outputPath": "lib",
 	"java.project.sourcePaths": ["example", "src", "test"],
 	"[markdown]": {"files.trimTrailingWhitespace": false},
 	"[yaml]": {"editor.insertSpaces": true}
