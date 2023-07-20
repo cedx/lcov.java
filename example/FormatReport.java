@@ -8,7 +8,7 @@ import io.belin.lcov.SourceFile;
 /**
  * Formats coverage data as LCOV report.
  */
-@SuppressWarnings({"PMD.NoPackage", "PMD.UseUtilityClass"})
+@SuppressWarnings({"PMD.NoPackage", "PMD.SystemPrintln", "PMD.UseUtilityClass"})
 class FormatReport {
 
 	/**

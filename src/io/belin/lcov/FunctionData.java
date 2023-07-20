@@ -51,7 +51,7 @@ public class FunctionData {
 
 	/**
 	 * Returns a string representation of this object.
-	 * @param asDefinition Value indicating whether to return the function definition (i.e. name and line number) instead of its data (i.e. name and execution count).
+	 * @param asDefinition Whether to return the function definition instead of its data.
 	 * @return The string representation of this object.
 	 */
 	public String toString(boolean asDefinition) {

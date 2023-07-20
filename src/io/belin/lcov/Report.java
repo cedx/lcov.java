@@ -54,6 +54,7 @@ public class Report {
 	 * @return The resulting coverage report.
 	 * @throws IllegalArgumentException A parsing error occurred.
 	 */
+	@SuppressWarnings({"PMD.CognitiveComplexity", "PMD.CyclomaticComplexity", "PMD.NPathComplexity"})
 	public static Report parse(String coverage) {
 		int offset = 0;
 		var report = new Report();
