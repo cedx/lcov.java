@@ -29,3 +29,8 @@ jobs:
           java -jar var/ivy-2.5.1.jar -cache lib -cachepath .classpath
       - name: Run tests
         run: lix Test
+      - name: Collect code coverage
+        if: success()
+        uses: codecov/codecov-action@v3
+        with:
+          files: var/coverage.xml
