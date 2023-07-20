@@ -28,7 +28,7 @@ jobs:
       - name: Cache Java dependencies
         uses: actions/cache@v3
         with:
-          path: ~/.ivy2/cache
+          path: ~/.ivy2
           key: java-${{runner.os}}-ivy-${{hashFiles('ivy.xml')}}
           restore-keys: java-${{runner.os}}-ivy-
       - name: Install dependencies
