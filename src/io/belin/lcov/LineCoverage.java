@@ -15,7 +15,7 @@ public class LineCoverage {
 	/**
 	 * The coverage data.
 	 */
-	public ArrayList<LineData> data;
+	public List<LineData> data;
 
 	/**
 	 * The number of lines found.

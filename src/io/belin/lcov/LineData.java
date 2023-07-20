@@ -54,6 +54,6 @@ public class LineData {
 	 */
 	@Override public String toString() {
 		var value = Token.LineData + ":" + lineNumber + "," + executionCount;
-		return checksum.length() > 0 ? value + "," + checksum : value;
+		return checksum.isEmpty() ? value : value + "," + checksum;
 	}
 }

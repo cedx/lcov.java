@@ -15,7 +15,7 @@ public class BranchCoverage {
 	/**
 	 * The coverage data.
 	 */
-	public ArrayList<BranchData> data;
+	public List<BranchData> data;
 
 	/**
 	 * The number of branches found.

@@ -16,7 +16,7 @@ public class Report {
 	/**
 	 * The source file list.
 	 */
-	public ArrayList<SourceFile> sourceFiles;
+	public List<SourceFile> sourceFiles;
 
 	/**
 	 * The test name.
@@ -61,10 +61,9 @@ public class Report {
 
 		for (var line: coverage.split("\r?\n")) {
 			offset++;
-			line = line.trim();
-			if (line.length() == 0) continue;
+			if (line.isBlank()) continue;
 
-			var parts = line.split(":");
+			var parts = line.trim().split(":");
 			if (parts.length < 2 && !parts[0].equals(Token.EndOfRecord.toString()))
 				throw new IllegalArgumentException("Invalid token format at line #%d.".formatted(offset));
 
@@ -73,7 +72,7 @@ public class Report {
 			if (token.isEmpty()) throw new IllegalArgumentException("Unknown token at line #%d.".formatted(offset));
 
 			switch (token.get()) {
-				case TestName -> { if (report.testName.length() == 0) report.testName = data[0]; }
+				case TestName -> { if (report.testName.isEmpty()) report.testName = data[0]; }
 				case EndOfRecord -> report.sourceFiles.add(sourceFile);
 
 				case BranchData -> {
@@ -118,7 +117,7 @@ public class Report {
 			}
 		}
 
-		if (report.sourceFiles.size() == 0) throw new IllegalArgumentException("The coverage data is empty or invalid.");
+		if (report.sourceFiles.isEmpty()) throw new IllegalArgumentException("The coverage data is empty or invalid.");
 		return report;
 	}
 
@@ -127,7 +126,7 @@ public class Report {
 	 * @return The string representation of this object.
 	 */
 	@Override public String toString() {
-		var stream = testName.length() > 0 ? Stream.of(Token.TestName + ":" + testName) : Stream.<String>empty();
+		var stream = testName.isEmpty() ? Stream.<String>empty() : Stream.of(Token.TestName + ":" + testName);
 		return Stream.concat(stream, sourceFiles.stream().map(String::valueOf)).collect(Collectors.joining(System.lineSeparator()));
 	}
 }

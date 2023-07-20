@@ -82,7 +82,7 @@ public enum Token {
 	 * Creates a new token.
 	 * @param id The token identifier.
 	 */
-	private Token(String id) {
+	Token(String id) {
 		this.id = id;
 	}
 

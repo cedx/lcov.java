@@ -8,6 +8,7 @@ import java.nio.file.Path;
 /**
  * Parses a LCOV report to coverage data.
  */
+@SuppressWarnings({"PMD.NoPackage", "PMD.UseUtilityClass"})
 class ParseReport {
 
 	/**

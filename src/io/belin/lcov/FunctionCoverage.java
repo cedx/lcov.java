@@ -15,7 +15,7 @@ public class FunctionCoverage {
 	/**
 	 * The coverage data.
 	 */
-	public ArrayList<FunctionData> data;
+	public List<FunctionData> data;
 
 	/**
 	 * The number of functions found.
