@@ -11,9 +11,6 @@ import org.junit.jupiter.api.Test;
 @DisplayName("LineCoverage")
 final class LineCoverageTest {
 
-	/**
-	 * Tests the {@link LineCoverage#toString} method.
-	 */
 	@Test
 	@DisplayName("toString()")
 	void testToString() {

@@ -11,9 +11,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 @DisplayName("LineData")
 final class LineDataTest {
 
-	/**
-	 * Tests the {@link LineData#toString} method.
-	 */
 	@ParameterizedTest
 	@DisplayName("toString()")
 	@CsvSource({

@@ -11,9 +11,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 @DisplayName("FunctionData")
 final class FunctionDataTest {
 
-	/**
-	 * Tests the {@link FunctionData#toString} method.
-	 */
 	@ParameterizedTest
 	@DisplayName("toString()")
 	@CsvSource({

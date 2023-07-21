@@ -12,9 +12,6 @@ import org.junit.jupiter.api.Test;
 @DisplayName("SourceFile")
 final class SourceFileTest {
 
-	/**
-	 * Tests the {@link SourceFile#toString} method.
-	 */
 	@Test
 	@DisplayName("toString()")
 	void testToString() {

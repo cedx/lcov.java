@@ -14,9 +14,6 @@ import org.junit.jupiter.api.Test;
 @DisplayName("Report")
 final class ReportTest {
 
-	/**
-	 * Tests the {@link Report#parse} method.
-	 */
 	@Test
 	@DisplayName("parse()")
 	void parse() throws IOException {
@@ -56,9 +53,6 @@ final class ReportTest {
 		assertThrows(IllegalArgumentException.class, () -> Report.parse("TN:Example"));
 	}
 
-	/**
-	 * Tests the {@link Report#toString} method.
-	 */
 	@Test
 	@DisplayName("toString()")
 	void testToString() {

@@ -11,9 +11,6 @@ import org.junit.jupiter.api.Test;
 @DisplayName("BranchCoverage")
 final class BranchCoverageTest {
 
-	/**
-	 * Tests the {@link BranchCoverage#toString} method.
-	 */
 	@Test
 	@DisplayName("toString()")
 	void testToString() {

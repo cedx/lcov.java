@@ -11,9 +11,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 @DisplayName("BranchData")
 final class BranchDataTest {
 
-	/**
-	 * Tests the {@link BranchData#toString} method.
-	 */
 	@ParameterizedTest
 	@DisplayName("toString()")
 	@CsvSource({
