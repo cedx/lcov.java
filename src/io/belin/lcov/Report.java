@@ -1,5 +1,6 @@
 package io.belin.lcov;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -108,7 +109,7 @@ public class Report {
 					));
 				}
 
-				case SourceFile -> sourceFile = new SourceFile(data[0], new FunctionCoverage(), new BranchCoverage(), new LineCoverage());
+				case SourceFile -> sourceFile = new SourceFile(Path.of(data[0]), new FunctionCoverage(), new BranchCoverage(), new LineCoverage());
 				case BranchesFound -> { if (sourceFile.branches != null) sourceFile.branches.found = Integer.parseInt(data[0]); }
 				case BranchesHit -> { if (sourceFile.branches != null) sourceFile.branches.hit = Integer.parseInt(data[0]); }
 				case FunctionsFound -> { if (sourceFile.functions != null) sourceFile.functions.found = Integer.parseInt(data[0]); }

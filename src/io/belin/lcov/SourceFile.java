@@ -1,5 +1,6 @@
 package io.belin.lcov;
 
+import java.nio.file.Path;
 import java.util.Objects;
 import java.util.StringJoiner;
 
@@ -26,20 +27,20 @@ public class SourceFile {
 	/**
 	 * The path to the source file.
 	 */
-	public String path;
+	public Path path;
 
 	/**
 	 * Creates a new source file.
 	 */
 	public SourceFile() {
-		this("");
+		this(Path.of(""));
 	}
 
 	/**
 	 * Creates a new source file.
 	 * @param path The path to the source file.
 	 */
-	public SourceFile(String path) {
+	public SourceFile(Path path) {
 		this(path, null, null, null);
 	}
 
@@ -50,7 +51,7 @@ public class SourceFile {
 	 * @param branches The branch coverage.
 	 * @param lines The line coverage.
 	 */
-	public SourceFile(String path, FunctionCoverage functions, BranchCoverage branches, LineCoverage lines) {
+	public SourceFile(Path path, FunctionCoverage functions, BranchCoverage branches, LineCoverage lines) {
 		this.branches = branches;
 		this.functions = functions;
 		this.lines = lines;

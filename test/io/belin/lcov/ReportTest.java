@@ -27,9 +27,9 @@ final class ReportTest {
 
 		// It should contain three source files.
 		assertEquals(3, report.sourceFiles.size());
-		assertEquals("/home/cedx/lcov.java/fixture.java", report.sourceFiles.get(0).path);
-		assertEquals("/home/cedx/lcov.java/func1.java", report.sourceFiles.get(1).path);
-		assertEquals("/home/cedx/lcov.java/func2.java", report.sourceFiles.get(2).path);
+		assertEquals(Path.of("/home/cedx/lcov.java/fixture.java"), report.sourceFiles.get(0).path);
+		assertEquals(Path.of("/home/cedx/lcov.java/func1.java"), report.sourceFiles.get(1).path);
+		assertEquals(Path.of("/home/cedx/lcov.java/func2.java"), report.sourceFiles.get(2).path);
 
 		// It should have detailed branch coverage.
 		var branches = report.sourceFiles.get(1).branches;
@@ -67,6 +67,6 @@ final class ReportTest {
 
 		var sourceFile = new SourceFile();
 		var report = new Report("LcovTest", List.of(sourceFile));
-		assertEquals("TN:LcovTest{eol}".replace("{eol}", eol) + sourceFile.toString(), report.toString());
+		assertEquals("TN:LcovTest{eol}".replace("{eol}", eol) + sourceFile, report.toString());
 	}
 }
