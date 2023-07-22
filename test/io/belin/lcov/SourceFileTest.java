@@ -20,7 +20,7 @@ final class SourceFileTest {
 
 		var sourceFile = new SourceFile(Path.of("/home/cedx/lcov.java"), new FunctionCoverage(), new BranchCoverage(), new LineCoverage());
 		var format = String.join(eol,
-			"SF:/home/cedx/lcov.java".replace('/', File.pathSeparatorChar),
+			"SF:/home/cedx/lcov.java".replace('/', File.separatorChar),
 			sourceFile.functions.toString(),
 			sourceFile.branches.toString(),
 			sourceFile.lines.toString(),
