@@ -1,5 +1,7 @@
 package io.belin.lcov;
 
+import java.util.Objects;
+
 /**
  * Provides details for line coverage.
  */
@@ -33,7 +35,7 @@ public class LineData {
 	 * @param executionCount The execution count.
 	 */
 	public LineData(int lineNumber, int executionCount) {
-		this(lineNumber, executionCount, "");
+		this(lineNumber, executionCount, null);
 	}
 
 	/**
@@ -43,7 +45,7 @@ public class LineData {
 	 * @param checksum The data checksum.
 	 */
 	public LineData(int lineNumber, int executionCount, String checksum) {
-		this.checksum = checksum;
+		this.checksum = Objects.requireNonNullElse(checksum, "");
 		this.executionCount = executionCount;
 		this.lineNumber = lineNumber;
 	}
