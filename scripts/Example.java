@@ -36,7 +36,7 @@ class Example {
 
 		var jar = Path.of("bin/%s.jar".formatted(pack));
 		if (!Files.exists(jar)) exec("java scripts/Dist.java");
-		exec("java " + script, Map.of("CLASSPATH", getClassPath(jar)));
+		System.exit(exec("java " + script, Map.of("CLASSPATH", getClassPath(jar))));
 	}
 
 	/**
