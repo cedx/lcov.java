@@ -24,23 +24,7 @@ class Build {
 	 */
 	public static void main(String... args) throws InterruptedException, IOException {
 		var options = Arrays.asList(args).contains("--debug") ? "-g -Xlint:all,-path,-processing" : "";
-		exec("javac -d bin %s src/%s/*.java".formatted(options, pack.replace('.', '/')), Map.of("CLASSPATH", getClassPath()));
-	}
-
-	/**
-	 * Executes the specified command.
-	 * @param command The command to execute.
-	 * @param environment The optional environment variables to add to the spawned process.
-	 * @return The exit code of the executed command.
-	 */
-	private static int exec(String command, Map<String, String> environment) throws InterruptedException, IOException {
-		var variables = new HashMap<>(System.getenv());
-		if (environment != null) variables.putAll(environment);
-
-		var envp = variables.entrySet().stream().map(entry -> entry.getKey() + "=" + entry.getValue()).toArray(String[]::new);
-		var process = Runtime.getRuntime().exec(Objects.requireNonNull(command), envp);
-		Stream.concat(process.errorReader().lines(), process.inputReader().lines()).parallel().forEach(System.out::println);
-		return process.waitFor();
+		shellExec("javac -d bin %s src/%s/*.java".formatted(options, pack.replace('.', '/')), Map.of("CLASSPATH", getClassPath()));
 	}
 
 	/**
@@ -49,5 +33,22 @@ class Build {
 	 */
 	private static String getClassPath() throws IOException {
 		return Files.readString(Path.of(".classpath")).stripTrailing();
+	}
+
+	/**
+	 * Executes the specified command in a shell.
+	 * @param command The command to execute.
+	 * @param environment The optional environment variables to add to the spawned process.
+	 * @return The exit code of the executed command.
+	 */
+	private static int shellExec(String command, Map<String, String> environment) throws InterruptedException, IOException {
+		var variables = new HashMap<>(System.getenv());
+		if (environment != null) variables.putAll(environment);
+
+		var envp = variables.entrySet().stream().map(entry -> entry.getKey() + "=" + entry.getValue()).toArray(String[]::new);
+		var shell = System.getProperty("os.name").startsWith("Windows") ? "cmd.exe /c" : "/bin/sh -c";
+		var process = Runtime.getRuntime().exec(shell + " " + Objects.requireNonNull(command), envp);
+		Stream.concat(process.errorReader().lines(), process.inputReader().lines()).parallel().forEach(System.out::println);
+		return process.waitFor();
 	}
 }

@@ -27,7 +27,7 @@ class Test {
 
 		var environment = Map.of("CLASSPATH", getClassPath(Path.of("bin")));
 		var pkgPath = pack.replace('.', '/');
-		if (exec("javac -d bin -g -Xlint:all,-path,-processing test/%s/*.java".formatted(pkgPath), environment) != 0) System.exit(2);
+		if (shellExec("javac -d bin -g -Xlint:all,-path,-processing test/%s/*.java".formatted(pkgPath), environment) != 0) System.exit(2);
 
 		// TODO
 		System.exit(exec("java org.junit.platform.console.ConsoleLauncher --select-package=" + pack, environment));
@@ -66,5 +66,16 @@ class Test {
 	private static String getClassPath(Path path) throws IOException {
 		var prefix = path != null && Files.exists(path) ? path.toString() + File.pathSeparator : "";
 		return prefix + Files.readString(Path.of(".classpath")).stripTrailing();
+	}
+
+	/**
+	 * Executes the specified command in a shell.
+	 * @param command The command to execute.
+	 * @param environment The optional environment variables to add to the spawned process.
+	 * @return The exit code of the executed command.
+	 */
+	private static int shellExec(String command, Map<String, String> environment) throws InterruptedException, IOException {
+		var shell = System.getProperty("os.name").startsWith("Windows") ? "cmd.exe /c" : "/bin/sh -c";
+		return exec(shell + " " + command, environment);
 	}
 }

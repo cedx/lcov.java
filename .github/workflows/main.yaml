@@ -25,10 +25,7 @@ jobs:
       - name: Install dependencies
         run: java -jar var/ivy/ivy-2.5.1.jar -cache lib -cachepath .classpath
       - name: Run tests
-        run: |
-          ls -la src/io/belin/lcov/*
-          ls -la test/io/belin/lcov/*
-          java scripts/Test.java
+        run: java scripts/Test.java
       - name: Collect code coverage
         if: success()
         uses: codecov/codecov-action@v3
