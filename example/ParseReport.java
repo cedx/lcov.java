@@ -19,10 +19,11 @@ class ParseReport {
 		try {
 			var report = Report.parse(Files.readString(Path.of("share/lcov.info")));
 			System.out.printf("The coverage report contains %d source files:%n", report.sourceFiles.size());
-			System.out.println(JsonbBuilder.create(new JsonbConfig().withFormatting(true)).toJson(report));
+			var builder = JsonbBuilder.create(new JsonbConfig().withFormatting(System.console() != null));
+			System.out.println(builder.toJson(report));
 		}
 		catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 	}
 }

@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 /**
  * Performs the static analysis of source code.
@@ -42,7 +43,7 @@ class Lint {
 
 		var envp = variables.entrySet().stream().map(entry -> "%s=%s".formatted(entry.getKey(), entry.getValue())).toArray(String[]::new);
 		var process = Runtime.getRuntime().exec(Objects.requireNonNull(command), envp);
-		process.inputReader().lines().forEach(System.out::println);
+		Stream.concat(process.errorReader().lines(), process.inputReader().lines()).forEach(System.out::println);
 		return process.waitFor();
 	}
 

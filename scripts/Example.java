@@ -25,9 +25,20 @@ class Example {
 	 * @param args The command line arguments.
 	 */
 	public static void main(String... args) throws InterruptedException, IOException {
+		if (args.length == 0) {
+			System.err.println("You must specify an example to run.");
+			System.exit(1);
+		}
+
+		var script = Path.of("example", args[0] + ".java");
+		if (!Files.exists(script)) {
+			System.err.println("Class not found: " + script);
+			System.exit(2);
+		}
+
 		var jar = Path.of("bin/%s.jar".formatted(pack));
-		if (!Files.exists(jar)) exec(List.of("java", "scripts/Dist.java"));
-		exec(Stream.concat(List.of("java").stream(), Arrays.stream(args)).toList(), Map.of("CLASSPATH", getClassPath(jar)));
+		if (!Files.exists(jar)) exec("java scripts/Dist.java");
+		exec("java " + script, Map.of("CLASSPATH", getClassPath(jar)));
 	}
 
 	/**
@@ -35,7 +46,7 @@ class Example {
 	 * @param command The command to execute.
 	 * @return The exit code of the executed command.
 	 */
-	private static int exec(List<String> command) throws InterruptedException, IOException {
+	private static int exec(String command) throws InterruptedException, IOException {
 		return exec(command, null);
 	}
 
@@ -45,13 +56,13 @@ class Example {
 	 * @param environment The optional environment variables to add to the spawned process.
 	 * @return The exit code of the executed command.
 	 */
-	private static int exec(List<String> command, Map<String, String> environment) throws InterruptedException, IOException {
+	private static int exec(String command, Map<String, String> environment) throws InterruptedException, IOException {
 		var variables = new HashMap<>(System.getenv());
 		if (environment != null) variables.putAll(environment);
 
 		var envp = variables.entrySet().stream().map(entry -> "%s=%s".formatted(entry.getKey(), entry.getValue())).toArray(String[]::new);
-		var process = Runtime.getRuntime().exec(Objects.requireNonNull(command).toArray(String[]::new), envp);
-		process.inputReader().lines().forEach(System.out::println);
+		var process = Runtime.getRuntime().exec(Objects.requireNonNull(command), envp);
+		Stream.concat(process.errorReader().lines(), process.inputReader().lines()).forEach(System.out::println);
 		return process.waitFor();
 	}
 

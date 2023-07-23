@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Element;
@@ -30,7 +32,7 @@ class Publish {
 	 */
 	private static int exec(String command) throws InterruptedException, IOException {
 		var process = Runtime.getRuntime().exec(Objects.requireNonNull(command));
-		process.inputReader().lines().forEach(System.out::println);
+		Stream.concat(process.errorReader().lines(), process.inputReader().lines()).forEach(System.out::println);
 		return process.waitFor();
 	}
 

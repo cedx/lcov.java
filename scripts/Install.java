@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 /**
  * Installs the project dependencies.
@@ -23,7 +24,7 @@ class Install {
 	private static int shellExec(String command) throws InterruptedException, IOException {
 		var shell = System.getProperty("os.name").startsWith("Windows") ? "cmd.exe /c" : "/bin/sh -c";
 		var process = Runtime.getRuntime().exec("%s %s".formatted(shell, Objects.requireNonNull(command)));
-		process.inputReader().lines().forEach(System.out::println);
+		Stream.concat(process.errorReader().lines(), process.inputReader().lines()).forEach(System.out::println);
 		return process.waitFor();
 	}
 }

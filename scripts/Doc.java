@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 /**
  * Builds the documentation.
@@ -39,7 +40,7 @@ class Doc {
 	 */
 	private static int exec(String command) throws InterruptedException, IOException {
 		var process = Runtime.getRuntime().exec(Objects.requireNonNull(command));
-		process.inputReader().lines().forEach(System.out::println);
+		Stream.concat(process.errorReader().lines(), process.inputReader().lines()).forEach(System.out::println);
 		return process.waitFor();
 	}
 

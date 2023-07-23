@@ -3,6 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 /**
  * Packages the project.
@@ -36,7 +37,7 @@ class Dist {
 	 */
 	private static int exec(String command) throws InterruptedException, IOException {
 		var process = Runtime.getRuntime().exec(Objects.requireNonNull(command));
-		process.inputReader().lines().forEach(System.out::println);
+		Stream.concat(process.errorReader().lines(), process.inputReader().lines()).forEach(System.out::println);
 		return process.waitFor();
 	}
 }
