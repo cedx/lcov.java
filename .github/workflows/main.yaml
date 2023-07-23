@@ -13,9 +13,9 @@ jobs:
           java-version: 17
       - name: Set up Ivy
         run: |
-          wget https://dlcdn.apache.org/ant/ivy/2.5.1/apache-ivy-2.5.1-bin-with-deps.tar.gz
+          wget --directory-prefix=var https://dlcdn.apache.org/ant/ivy/2.5.1/apache-ivy-2.5.1-bin-with-deps.tar.gz
           mkdir --parents var/ivy
-          tar --directory=var/ivy --extract --file=apache-ivy-2.5.1-bin-with-deps.tar.gz --strip-components=1
+          tar --directory=var/ivy --extract --file=var/apache-ivy-2.5.1-bin-with-deps.tar.gz --strip-components=1
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
@@ -26,9 +26,8 @@ jobs:
         run: java -jar var/ivy/ivy-2.5.1.jar -cache lib -cachepath .classpath
       - name: Run tests
         run: |
-          ls *
-          ls src/*
-          java scripts/Clean.java
+          ls -la src/io/belin/lcov/*
+          ls -la test/io/belin/lcov/*
           java scripts/Test.java
       - name: Collect code coverage
         if: success()
