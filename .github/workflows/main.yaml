@@ -14,7 +14,7 @@ jobs:
       - name: Set up Ivy
         run: |
           wget https://dlcdn.apache.org/ant/ivy/2.5.1/apache-ivy-2.5.1-bin-with-deps.tar.gz
-          tar --directory=var --extract --file=apache-ivy-2.5.1-bin-with-deps.tar.gz --strip-components=1
+          tar --directory=var/ivy --extract --file=apache-ivy-2.5.1-bin-with-deps.tar.gz --strip-components=1
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
@@ -22,10 +22,12 @@ jobs:
           key: java-${{runner.os}}-ivy-${{hashFiles('ivy.xml')}}
           restore-keys: java-${{runner.os}}-ivy-
       - name: Install dependencies
-        run: java -jar var/ivy-2.5.1.jar -cache lib -cachepath .classpath
+        run: java -jar var/ivy/ivy-2.5.1.jar -cache lib -cachepath .classpath
       - name: Run tests
-        run:
+        run: |
           ls *
+          ls src/*
+          java scripts/Clean.java
           java scripts/Test.java
       - name: Collect code coverage
         if: success()
