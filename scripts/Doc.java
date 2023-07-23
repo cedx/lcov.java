@@ -40,7 +40,7 @@ class Doc {
 	 */
 	private static int exec(String command) throws InterruptedException, IOException {
 		var process = Runtime.getRuntime().exec(Objects.requireNonNull(command));
-		Stream.concat(process.errorReader().lines(), process.inputReader().lines()).forEach(System.out::println);
+		Stream.concat(process.errorReader().lines(), process.inputReader().lines()).parallel().forEach(System.out::println);
 		return process.waitFor();
 	}
 

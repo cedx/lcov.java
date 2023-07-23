@@ -40,7 +40,7 @@ class Build {
 
 		var envp = variables.entrySet().stream().map(entry -> "%s=%s".formatted(entry.getKey(), entry.getValue())).toArray(String[]::new);
 		var process = Runtime.getRuntime().exec(Objects.requireNonNull(command), envp);
-		Stream.concat(process.errorReader().lines(), process.inputReader().lines()).forEach(System.out::println);
+		Stream.concat(process.errorReader().lines(), process.inputReader().lines()).parallel().forEach(System.out::println);
 		return process.waitFor();
 	}
 
