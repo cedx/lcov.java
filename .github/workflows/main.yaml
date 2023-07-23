@@ -14,6 +14,7 @@ jobs:
       - name: Set up Ivy
         run: |
           wget https://dlcdn.apache.org/ant/ivy/2.5.1/apache-ivy-2.5.1-bin-with-deps.tar.gz
+          mkdir --parents var/ivy
           tar --directory=var/ivy --extract --file=apache-ivy-2.5.1-bin-with-deps.tar.gz --strip-components=1
       - name: Cache dependencies
         uses: actions/cache@v3
