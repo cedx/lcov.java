@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -53,7 +54,7 @@ class Test {
 		if (environment != null) map.putAll(environment);
 
 		var variables = map.entrySet().stream().map(entry -> entry.getKey() + "=" + entry.getValue());
-		var process = Runtime.getRuntime().exec(Objects.requireNonNull(command), variables).toArray(String[]::new);
+		var process = Runtime.getRuntime().exec(Objects.requireNonNull(command), variables.toArray(String[]::new));
 		Stream.concat(process.errorReader().lines(), process.inputReader().lines()).parallel().forEach(System.out::println);
 		return process.waitFor();
 	}
@@ -75,7 +76,15 @@ class Test {
 	 * @return The exit code of the executed command.
 	 */
 	private static int shellExec(String command, Map<String, String> environment) throws InterruptedException, IOException {
-		var shell = System.getProperty("os.name").startsWith("Windows") ? "cmd.exe /c" : "/bin/sh -c";
-		return exec(shell + " " + command, environment);
+		var map = new HashMap<>(System.getenv());
+		if (environment != null) map.putAll(environment);
+
+		var shell = System.getProperty("os.name").startsWith("Windows") ? List.of("cmd.exe", "/c") : List.of("/bin/sh", "-c");
+		var cmdList = Stream.concat(shell.stream(), Stream.of(Objects.requireNonNull(command)));
+		var variables = map.entrySet().stream().map(entry -> entry.getKey() + "=" + entry.getValue());
+
+		var process = Runtime.getRuntime().exec(cmdList.toArray(String[]::new), variables.toArray(String[]::new));
+		Stream.concat(process.errorReader().lines(), process.inputReader().lines()).parallel().forEach(System.out::println);
+		return process.waitFor();
 	}
 }
