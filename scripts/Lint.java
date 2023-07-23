@@ -27,8 +27,19 @@ class Lint {
 		var environment = Map.of("CLASSPATH", getClassPath(Path.of("bin")));
 		var mainClass = "net.sourceforge.pmd.cli.PmdCli";
 		var sources = String.join(",", directories.toArray(String[]::new));
+
+		exec("java scripts/Build.java --debug");
 		exec("java %s cpd --dir=%s --exclude=scripts --minimum-tokens=100".formatted(mainClass, sources), environment);
 		exec("java %s check --cache=var/pmd.cache --dir=%s --no-progress --rulesets=etc/pmd.xml".formatted(mainClass, sources), environment);
+	}
+
+	/**
+	 * Executes the specified command.
+	 * @param command The command to execute.
+	 * @return The exit code of the executed command.
+	 */
+	private static int exec(String command) throws InterruptedException, IOException {
+		return exec(command, null);
 	}
 
 	/**

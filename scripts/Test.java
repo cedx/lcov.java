@@ -24,13 +24,11 @@ class Test {
 	 * @param args The command line arguments.
 	 */
 	public static void main(String... args) throws InterruptedException, IOException {
-		if (exec("java scripts/Build.java --debug") != 0) System.exit(1);
-
 		var environment = Map.of("CLASSPATH", getClassPath(Path.of("bin")));
 		var pkgPath = pack.replace('.', '/');
-		if (shellExec("javac -d bin -g -Xlint:all,-path,-processing test/%s/*.java".formatted(pkgPath), environment) != 0) System.exit(2);
 
-		// TODO
+		exec("java scripts/Build.java --debug");
+		shellExec("javac -d bin -g -Xlint:all,-path,-processing test/%s/*.java".formatted(pkgPath), environment);
 		System.exit(exec("java org.junit.platform.console.ConsoleLauncher --select-package=" + pack, environment));
 	}
 
