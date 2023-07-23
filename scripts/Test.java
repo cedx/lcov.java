@@ -30,7 +30,7 @@ class Test {
 		if (exec("javac -d bin -g -Xlint:all,-path,-processing test/%s/*.java".formatted(pkgPath), environment) != 0) System.exit(2);
 
 		// TODO
-		System.exit(exec("java org.junit.platform.console.ConsoleLauncher --select-package=%s".formatted(pack), environment));
+		System.exit(exec("java org.junit.platform.console.ConsoleLauncher --select-package=" + pack, environment));
 	}
 
 	/**
@@ -52,7 +52,7 @@ class Test {
 		var variables = new HashMap<>(System.getenv());
 		if (environment != null) variables.putAll(environment);
 
-		var envp = variables.entrySet().stream().map(entry -> "%s=%s".formatted(entry.getKey(), entry.getValue())).toArray(String[]::new);
+		var envp = variables.entrySet().stream().map(entry -> entry.getKey() + "=" + entry.getValue()).toArray(String[]::new);
 		var process = Runtime.getRuntime().exec(Objects.requireNonNull(command), envp);
 		Stream.concat(process.errorReader().lines(), process.inputReader().lines()).parallel().forEach(System.out::println);
 		return process.waitFor();
