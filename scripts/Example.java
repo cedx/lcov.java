@@ -55,11 +55,11 @@ class Example {
 	 * @return The exit code of the executed command.
 	 */
 	private static int exec(String command, Map<String, String> environment) throws InterruptedException, IOException {
-		var variables = new HashMap<>(System.getenv());
-		if (environment != null) variables.putAll(environment);
+		var map = new HashMap<>(System.getenv());
+		if (environment != null) map.putAll(environment);
 
-		var envp = variables.entrySet().stream().map(entry -> entry.getKey() + "=" + entry.getValue()).toArray(String[]::new);
-		var process = Runtime.getRuntime().exec(Objects.requireNonNull(command), envp);
+		var variables = map.entrySet().stream().map(entry -> entry.getKey() + "=" + entry.getValue());
+		var process = Runtime.getRuntime().exec(Objects.requireNonNull(command), variables.toArray(String[]::new));
 		Stream.concat(process.errorReader().lines(), process.inputReader().lines()).parallel().forEach(System.out::println);
 		return process.waitFor();
 	}

@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -22,8 +23,9 @@ class Install {
 	 * @return The exit code of the executed command.
 	 */
 	private static int shellExec(String command) throws InterruptedException, IOException {
-		var shell = System.getProperty("os.name").startsWith("Windows") ? "cmd.exe /c" : "/bin/sh -c";
-		var process = Runtime.getRuntime().exec(shell + " " + Objects.requireNonNull(command));
+		var shell = System.getProperty("os.name").startsWith("Windows") ? List.of("cmd.exe", "/c") : List.of("/bin/sh", "-c");
+		var cmdList = Stream.concat(shell.stream(), Stream.of(Objects.requireNonNull(command)));
+		var process = Runtime.getRuntime().exec(cmdList.toArray(String[]::new));
 		Stream.concat(process.errorReader().lines(), process.inputReader().lines()).parallel().forEach(System.out::println);
 		return process.waitFor();
 	}

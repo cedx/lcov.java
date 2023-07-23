@@ -3,6 +3,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -42,12 +43,14 @@ class Build {
 	 * @return The exit code of the executed command.
 	 */
 	private static int shellExec(String command, Map<String, String> environment) throws InterruptedException, IOException {
-		var variables = new HashMap<>(System.getenv());
-		if (environment != null) variables.putAll(environment);
+		var map = new HashMap<>(System.getenv());
+		if (environment != null) map.putAll(environment);
 
-		var envp = variables.entrySet().stream().map(entry -> entry.getKey() + "=" + entry.getValue()).toArray(String[]::new);
-		var shell = System.getProperty("os.name").startsWith("Windows") ? "cmd.exe /c" : "/bin/sh -c";
-		var process = Runtime.getRuntime().exec(shell + " " + Objects.requireNonNull(command), envp);
+		var shell = System.getProperty("os.name").startsWith("Windows") ? List.of("cmd.exe", "/c") : List.of("/bin/sh", "-c");
+		var cmdList = Stream.concat(shell.stream(), Stream.of(Objects.requireNonNull(command)));
+		var variables = map.entrySet().stream().map(entry -> entry.getKey() + "=" + entry.getValue());
+
+		var process = Runtime.getRuntime().exec(cmdList.toArray(String[]::new), variables.toArray(String[]::new));
 		Stream.concat(process.errorReader().lines(), process.inputReader().lines()).parallel().forEach(System.out::println);
 		return process.waitFor();
 	}
