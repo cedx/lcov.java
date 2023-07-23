@@ -61,7 +61,7 @@ public class Report {
 		var report = new Report();
 		var sourceFile = new SourceFile();
 
-		for (var line: coverage.split("\r?\n")) {
+		for (var line: coverage.split("\\r?\\n")) {
 			offset++;
 			if (line.isBlank()) continue;
 
