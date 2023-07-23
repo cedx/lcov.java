@@ -28,7 +28,7 @@ class Lint {
 		var mainClass = "net.sourceforge.pmd.cli.PmdCli";
 		var sources = String.join(",", directories.toArray(String[]::new));
 		exec("java %s cpd --dir=%s --exclude=scripts --minimum-tokens=100".formatted(mainClass, sources), environment);
-		exec("java %s check --cache=var/pmd.cache --dir=%s --rulesets=etc/pmd.xml".formatted(mainClass, sources), environment);
+		exec("java %s check --cache=var/pmd.cache --dir=%s --no-progress --rulesets=etc/pmd.xml".formatted(mainClass, sources), environment);
 	}
 
 	/**
