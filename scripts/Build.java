@@ -24,7 +24,7 @@ class Build {
 	 * @param args The command line arguments.
 	 */
 	public static void main(String... args) throws InterruptedException, IOException {
-		var options = Arrays.asList(args).contains("--debug") ? "-g -Xlint:all,-path,-processing" : "";
+		var options = Arrays.asList(args).contains("--debug") ? "-g -Xlint:all,-path,-processing" : "-g:none";
 		shellExec("javac -d bin %s src/%s/*.java".formatted(options, pack.replace('.', '/')), Map.of("CLASSPATH", getClassPath()));
 	}
 
