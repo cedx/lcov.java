@@ -8,13 +8,14 @@ import java.nio.file.Path;
 /**
  * Parses a LCOV report to coverage data.
  */
-@SuppressWarnings({"PMD.NoPackage", "PMD.SystemPrintln", "PMD.UseUtilityClass"})
+@SuppressWarnings({"PMD.NoPackage", "PMD.UseUtilityClass"})
 class ParseReport {
 
 	/**
 	 * Application entry point.
 	 * @param args The command line arguments.
 	 */
+	@SuppressWarnings("PMD.SystemPrintln")
 	public static void main(String... args) throws IOException {
 		try {
 			var report = Report.parse(Files.readString(Path.of("share/lcov.info")));

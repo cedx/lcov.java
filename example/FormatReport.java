@@ -9,13 +9,14 @@ import io.belin.lcov.SourceFile;
 /**
  * Formats coverage data as LCOV report.
  */
-@SuppressWarnings({"PMD.NoPackage", "PMD.SystemPrintln", "PMD.UseUtilityClass"})
+@SuppressWarnings({"PMD.NoPackage", "PMD.UseUtilityClass"})
 class FormatReport {
 
 	/**
 	 * Application entry point.
 	 * @param args The command line arguments.
 	 */
+	@SuppressWarnings("PMD.SystemPrintln")
 	public static void main(String... args) {
 		var sourceFile = new SourceFile(Path.of("/home/cedx/lcov.java/fixture.java"));
 		sourceFile.functions = new FunctionCoverage(1, 1);
