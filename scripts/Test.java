@@ -78,7 +78,7 @@ class Test {
 	 */
 	private static void extractJacocoJar(String jarName, Path outputDirectory)
 	throws InterruptedException, IOException, ParserConfigurationException, SAXException {
-		var outputFile = outputDirectory.resolve(jarName);
+		var outputFile = Objects.requireNonNull(outputDirectory).resolve(Objects.requireNonNull(jarName));
 		if (Files.exists(outputFile)) return;
 
 		var xml = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new File("ivy.xml"));
@@ -103,7 +103,7 @@ class Test {
 	 */
 	private static void generateCoverageReport(Path execFile, Path classDirectory) throws InterruptedException, IOException {
 		Files.walk(Objects.requireNonNull(classDirectory))
-			.filter(file -> file.endsWith("Test.class"))
+			.filter(file -> file.toString().endsWith("Test.class"))
 			.map(Path::toFile)
 			.forEach(File::delete);
 
