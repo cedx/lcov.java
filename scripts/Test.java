@@ -41,8 +41,8 @@ class Test {
 		var jacocoExec = outputDirectory.resolve("jacoco.exec");
 		var jacocoAgent = "-javaagent:%s=append=false,destfile=%s,includes=%s.*".formatted(outputDirectory.resolve(jacocoJar), jacocoExec, pack);
 		var exitCode = exec("java %s org.junit.platform.console.ConsoleLauncher --select-package=%s".formatted(jacocoAgent, pack), environment);
-
 		if (exitCode != 0) System.exit(exitCode);
+
 		generateCoverageReport(jacocoExec, Path.of("bin").resolve(pkgPath));
 	}
 
