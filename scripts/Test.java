@@ -34,7 +34,7 @@ class Test {
 		var pkgPath = Path.of(pack.replace('.', '/'));
 		shellExec("javac -d bin -g -Xlint:all,-path,-processing test/%s/*.java".formatted(pkgPath), environment);
 
-		var jacocoJar = "jacocoagent.jar";
+		var jacocoJar = Path.of("jacocoagent.jar");
 		var outputDirectory = Path.of("var");
 		extractJacocoJar(jacocoJar, outputDirectory);
 
@@ -76,7 +76,7 @@ class Test {
 	 * @param jarFile The path of the JaCoCo Agent archive.
 	 * @param outputDirectory The path of the directory where to extract the agent.
 	 */
-	private static void extractJacocoJar(String jarFile, Path outputDirectory)
+	private static void extractJacocoJar(Path jarFile, Path outputDirectory)
 	throws InterruptedException, IOException, ParserConfigurationException, SAXException {
 		var outputFile = Objects.requireNonNull(outputDirectory).resolve(Objects.requireNonNull(jarFile));
 		if (Files.exists(outputFile)) return;
@@ -93,7 +93,7 @@ class Test {
 			.getAttribute("rev");
 
 		exec("jar --extract --file=lib/org.jacoco/org.jacoco.agent/jars/org.jacoco.agent-%s.jar %s".formatted(version, jarFile));
-		Files.move(Path.of(jarFile), outputFile);
+		Files.move(jarFile, outputFile);
 	}
 
 	/**
