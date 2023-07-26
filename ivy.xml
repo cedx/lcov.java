@@ -8,6 +8,7 @@
 			Parse and format to LCOV your code coverage reports.
 		</description>
 	</info>
+
 	<dependencies>
 		<dependency org="net.sourceforge.pmd" name="pmd-cli" rev="7.0.0-rc3"/>
 		<dependency org="org.eclipse" name="yasson" rev="3.0.3"/>

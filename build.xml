@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<project name="lcov" default="build">
+	<property name="bin.dir" value="${basedir}/bin"/>
+	<property name="doc.dir" value="${basedir}/docs"/>
+	<property name="src.dir" value="${basedir}/src"/>
+	<property name="test.dir" value="${basedir}/test"/>
+
+	<target name="build" description="Builds the project.">
+
+	</target>
+
+	<target name="clean" description="Deletes all generated files.">
+
+	</target>
+
+	<target name="dist" description="Packages the project.">
+
+	</target>
+
+	<target name="doc" description="Builds the documentation.">
+		<copy file="${basedir}/CHANGELOG.md" tofile="${doc.dir}/changelog.md"/>
+		<copy file="${basedir}/LICENSE.md" tofile="${doc.dir}/license.md"/>
+		<delete dir="${doc.dir}/api"/>
+		<javadoc packagenames="io.belin.*" sourcepath="${src.dir}" destdir="${doc.dir}/api"/>
+		<copy file="${doc.dir}/favicon.ico" todir="${doc.dir}/api"/>
+	</target>
+
+	<target name="install" description="Installs the project dependencies.">
+
+	</target>
+
+	<target name="lint" description="Performs the static analysis of source code.">
+
+	</target>
+
+	<target name="publish" description="Publishes the package.">
+
+	</target>
+
+	<target name="run" description="Runs a main class from the &quot;example&quot; folder.">
+
+	</target>
+
+	<target name="test" description="Runs the test suite.">
+
+	</target>
+
+	<target name="version" description="Updates the version number in the sources.">
+
+	</target>
+</project>
