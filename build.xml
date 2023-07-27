@@ -1,21 +1,20 @@
 <?xml version="1.0"?>
 <project name="lcov" default="build" xmlns:ivy="antlib:org.apache.ivy.ant">
-	<property name="bin.dir" value="${basedir}/bin"/>
-	<property name="doc.dir" value="${basedir}/docs"/>
-	<property name="etc.dir" value="${basedir}/etc"/>
-	<property name="lib.dir" value="${basedir}/lib"/>
-	<property name="src.dir" value="${basedir}/src"/>
-	<property name="test.dir" value="${basedir}/test"/>
 	<xmlproperty file="ivy.xml"/>
+	<property name="debug" value="false"/>
+	<property name="version" value="${ivy-module.info(revision)}"/>
 
-	<!-- TODO -->
 	<target name="build" description="Builds the project.">
-
+		<mkdir dir="bin"/>
+		<javac srcdir="src" destdir="bin" classpath="lib" debug="${debug}"/>
 	</target>
 
 	<!-- TODO -->
 	<target name="clean" description="Deletes all generated files.">
-
+		<delete dir="bin"/>
+		<delete>
+			<fileset dir="var" excludes=".gitkeep"/>
+		</delete>
 	</target>
 
 	<!-- TODO -->
@@ -25,14 +24,15 @@
 
 	<!-- TODO -->
 	<target name="doc" description="Builds the documentation.">
-		<copy file="${basedir}/CHANGELOG.md" tofile="${doc.dir}/changelog.md"/>
-		<copy file="${basedir}/LICENSE.md" tofile="${doc.dir}/license.md"/>
-		<delete dir="${doc.dir}/api"/>
-		<javadoc packagenames="io.belin.*" sourcepath="${src.dir}" destdir="${doc.dir}/api"/>
-		<copy file="${doc.dir}/favicon.ico" todir="${doc.dir}/api"/>
+		<copy file="CHANGELOG.md" tofile="docs/changelog.md"/>
+		<copy file="LICENSE.md" tofile="docs/license.md"/>
+		<delete dir="docs/api"/>
+		<javadoc packagenames="io.belin.*" sourcepath="src" destdir="docs/api"/>
+		<copy file="docs/favicon.ico" todir="docs/api"/>
 	</target>
 
 	<target name="install" description="Installs the project dependencies.">
+		<mkdir dir="lib"/>
 		<ivy:retrieve log="download-only" sync="true"/>
 	</target>
 
@@ -57,8 +57,7 @@
 	</target>
 
 	<target name="version" description="Updates the version number in the sources.">
-		<property name="pkgVersion" value="${ivy-module.info(revision)}"/>
-		<replaceregexp file="${basedir}/README.md" match="project/v\d+(\.\d+){2}" replace="project/v${pkgVersion}"/>
-		<replaceregexp file="${etc.dir}/manifest.properties" match="Version: \d+(\.\d+){2}" replace="Version: ${pkgVersion}"/>
+		<replaceregexp file="README.md" match="project/v\d+(\.\d+){2}" replace="project/v${version}"/>
+		<replaceregexp file="etc/manifest.properties" match="Version: \d+(\.\d+){2}" replace="Version: ${version}"/>
 	</target>
 </project>
