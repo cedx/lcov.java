@@ -32,9 +32,8 @@
 		<copy file="${doc.dir}/favicon.ico" todir="${doc.dir}/api"/>
 	</target>
 
-	<!-- TODO -->
 	<target name="install" description="Installs the project dependencies.">
-		<ivy:retrieve pattern="${lib.dir}/[organisation]/[artifact]-[revision].[ext]" sync="true"/>
+		<ivy:retrieve log="download-only" sync="true"/>
 	</target>
 
 	<!-- TODO -->
