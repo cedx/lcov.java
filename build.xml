@@ -6,7 +6,9 @@
 
 	<target name="build" description="Builds the project.">
 		<mkdir dir="bin"/>
-		<javac srcdir="src" destdir="bin" classpath="lib" debug="${debug}"/>
+		<javac srcdir="src" destdir="bin" classpath="lib" debug="${debug}" includeantruntime="false">
+			<compilerarg value="-Xlint:all,-path,-processing"/>
+		</javac>
 	</target>
 
 	<!-- TODO -->
@@ -38,6 +40,7 @@
 
 	<!-- TODO -->
 	<target name="lint" description="Performs the static analysis of source code." depends="build">
+		<property name="debug" value="true"/>
 
 	</target>
 
@@ -56,8 +59,8 @@
 	</target>
 
 	<!-- TODO -->
-	<target name="test" description="Runs the test suite.">
-
+	<target name="test" description="Runs the test suite." depends="build">
+		<property name="debug" value="true"/>
 	</target>
 
 	<target name="version" description="Updates the version number in the sources.">
