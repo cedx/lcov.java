@@ -11,7 +11,6 @@
 		</javac>
 	</target>
 
-	<!-- TODO -->
 	<target name="clean" description="Deletes all generated files.">
 		<delete dir="bin"/>
 		<delete>
@@ -20,8 +19,9 @@
 	</target>
 
 	<!-- TODO -->
-	<target name="dist" description="Packages the project.">
-
+	<target name="dist" description="Packages the project." depends="clean,build,version">
+		<mkdir dir="bin/META-INF"/>
+		<copy file="CHANGELOG.md" todir="bin/META-INF"/>
 	</target>
 
 	<!-- TODO -->
@@ -48,9 +48,13 @@
 		<ivy:checkdepsupdate log="download-only"/>
 	</target>
 
-	<!-- TODO -->
-	<target name="publish" description="Publishes the package.">
-
+	<target name="publish" description="Publishes the package." depends="dist">
+		<exec executable="git">
+			<arg line="tag v${version}"/>
+		</exec>
+		<exec executable="git">
+			<arg line="push origin v${version}"/>
+		</exec>
 	</target>
 
 	<!-- TODO -->
