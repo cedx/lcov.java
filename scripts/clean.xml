@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<project>
+	<target name="clean" description="Deletes all generated files.">
+		<delete dir="bin"/>
+		<delete>
+			<fileset dir="var" excludes=".gitkeep"/>
+		</delete>
+	</target>
+</project>

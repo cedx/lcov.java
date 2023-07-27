@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<project>
+	<!-- TODO -->
+	<target name="test" description="Runs the test suite." depends="build">
+		<property name="debug" value="true"/>
+	</target>
+</project>

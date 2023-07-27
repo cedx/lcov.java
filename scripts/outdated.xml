@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<project xmlns:ivy="antlib:org.apache.ivy.ant">
+	<target name="outdated" description="Checks whether installed packages are out of date.">
+		<ivy:checkdepsupdate log="quiet"/>
+	</target>
+</project>

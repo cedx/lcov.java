@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<project>
+	<!-- TODO -->
+	<target name="run" description="Runs a main class from the &quot;example&quot; folder.">
+
+	</target>
+</project>

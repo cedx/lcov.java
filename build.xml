@@ -4,71 +4,15 @@
 	<property name="debug" value="false"/>
 	<property name="version" value="${ivy-module.info(revision)}"/>
 
-	<target name="build" description="Builds the project.">
-		<mkdir dir="bin"/>
-		<javac srcdir="src" destdir="bin" classpath="lib" debug="${debug}" includeantruntime="false">
-			<compilerarg value="-Xlint:all,-path,-processing"/>
-		</javac>
-	</target>
-
-	<target name="clean" description="Deletes all generated files.">
-		<delete dir="bin"/>
-		<delete>
-			<fileset dir="var" excludes=".gitkeep"/>
-		</delete>
-	</target>
-
-	<!-- TODO -->
-	<target name="dist" description="Packages the project." depends="clean,build,version">
-		<mkdir dir="bin/META-INF"/>
-		<copy file="CHANGELOG.md" todir="bin/META-INF"/>
-	</target>
-
-	<!-- TODO -->
-	<target name="doc" description="Builds the documentation.">
-		<copy file="CHANGELOG.md" tofile="docs/changelog.md"/>
-		<copy file="LICENSE.md" tofile="docs/license.md"/>
-		<delete dir="docs/api"/>
-		<javadoc packagenames="io.belin.*" sourcepath="src" destdir="docs/api"/>
-		<copy file="docs/favicon.ico" todir="docs/api"/>
-	</target>
-
-	<target name="install" description="Installs the project dependencies.">
-		<mkdir dir="lib"/>
-		<ivy:retrieve log="download-only" sync="true"/>
-	</target>
-
-	<!-- TODO -->
-	<target name="lint" description="Performs the static analysis of source code." depends="build">
-		<property name="debug" value="true"/>
-
-	</target>
-
-	<target name="outdated" description="Checks whether installed packages are out of date.">
-		<ivy:checkdepsupdate log="download-only"/>
-	</target>
-
-	<target name="publish" description="Publishes the package." depends="dist">
-		<exec executable="git">
-			<arg line="tag v${version}"/>
-		</exec>
-		<exec executable="git">
-			<arg line="push origin v${version}"/>
-		</exec>
-	</target>
-
-	<!-- TODO -->
-	<target name="run" description="Runs a main class from the &quot;example&quot; folder.">
-
-	</target>
-
-	<!-- TODO -->
-	<target name="test" description="Runs the test suite." depends="build">
-		<property name="debug" value="true"/>
-	</target>
-
-	<target name="version" description="Updates the version number in the sources.">
-		<replaceregexp file="README.md" match="project/v\d+(\.\d+){2}" replace="project/v${version}"/>
-		<replaceregexp file="etc/manifest.properties" match="Version: \d+(\.\d+){2}" replace="Version: ${version}"/>
-	</target>
+	<import file="scripts/build.xml"/>
+	<import file="scripts/clean.xml"/>
+	<import file="scripts/dist.xml"/>
+	<import file="scripts/doc.xml"/>
+	<import file="scripts/install.xml"/>
+	<import file="scripts/lint.xml"/>
+	<import file="scripts/outdated.xml"/>
+	<import file="scripts/publish.xml"/>
+	<import file="scripts/run.xml"/>
+	<import file="scripts/test.xml"/>
+	<import file="scripts/version.xml"/>
 </project>

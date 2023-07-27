@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<project>
+	<target name="publish" description="Publishes the package." depends="dist">
+		<exec executable="git">
+			<arg line="tag v${version}"/>
+		</exec>
+		<exec executable="git">
+			<arg line="push origin v${version}"/>
+		</exec>
+	</target>
+</project>
