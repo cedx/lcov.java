@@ -37,8 +37,12 @@
 	</target>
 
 	<!-- TODO -->
-	<target name="lint" description="Performs the static analysis of source code.">
+	<target name="lint" description="Performs the static analysis of source code." depends="build">
 
+	</target>
+
+	<target name="outdated" description="Checks whether installed packages are out of date.">
+		<ivy:checkdepsupdate log="download-only"/>
 	</target>
 
 	<!-- TODO -->
