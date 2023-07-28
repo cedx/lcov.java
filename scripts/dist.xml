@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<project>
-	<target name="dist" description="Packages the project." depends="clean,build,version">
-		<mkdir dir="bin/META-INF"/>
-		<copy file="LICENSE.md" todir="bin/META-INF"/>
-		<jar basedir="bin" destfile="bin/${ant.project.name}.jar" manifest="etc/manifest.properties"/>
-	</target>
-</project>

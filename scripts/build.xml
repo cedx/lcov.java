@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<project>
-	<target name="build" description="Builds the project.">
-		<mkdir dir="bin"/>
-		<javac srcdir="src" destdir="bin" classpathref="project.classpath" debug="${project.debug}" includeantruntime="false">
-			<compilerarg value="-Xlint:all,-path,-processing"/>
-		</javac>
-	</target>
-</project>

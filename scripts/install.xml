@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<project xmlns:ivy="antlib:org.apache.ivy.ant">
-	<target name="install" description="Installs the project dependencies.">
-		<mkdir dir="lib"/>
-		<ivy:retrieve log="download-only" sync="true"/>
-	</target>
-</project>

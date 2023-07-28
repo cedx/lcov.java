@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<project>
-	<!-- TODO -->
-	<target name="lint" description="Performs the static analysis of source code." depends="build">
-		<property name="debug" value="true"/>
-
-	</target>
-</project>
