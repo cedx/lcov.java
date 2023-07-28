@@ -2,6 +2,6 @@
 <project>
 	<target name="run" description="Runs a main class from the &quot;example&quot; folder.">
 		<fail message="You must specify an example to run using -D:class=&lt;example&gt;." unless="class"/>
-		<java sourcefile="example/${class}.java" classpathref="classpath" failonerror="true" fork="true"/>
+		<java sourcefile="example/${class}.java" classpathref="project.classpath" failonerror="true" fork="true"/>
 	</target>
 </project>

@@ -2,10 +2,10 @@
 <project>
 	<!-- TODO -->
 	<target name="test" description="Runs the test suite." depends="build">
-		<javac srcdir="test" destdir="bin" classpathref="classpath" debug="true" includeantruntime="false">
+		<javac srcdir="test" destdir="bin" classpathref="project.classpath" debug="true" includeantruntime="false">
 			<compilerarg value="-Xlint:all,-path,-processing"/>
 		</javac>
-		<java classname="org.junit.platform.console.ConsoleLauncher" classpathref="classpath" failonerror="true" fork="true">
+		<java classname="org.junit.platform.console.ConsoleLauncher" classpathref="project.classpath" failonerror="true" fork="true">
 			<arg value="--select-package=io.belin.${ant.project.name}"/>
 		</java>
 

@@ -2,10 +2,10 @@
 <project>
 	<target name="publish" description="Publishes the package." depends="dist">
 		<exec executable="git">
-			<arg line="tag v${version}"/>
+			<arg line="tag v${project.version}"/>
 		</exec>
 		<exec executable="git">
-			<arg line="push origin v${version}"/>
+			<arg line="push origin v${project.version}"/>
 		</exec>
 	</target>
 </project>

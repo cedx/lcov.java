@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <project name="lcov" default="build" xmlns:ivy="antlib:org.apache.ivy.ant">
 	<xmlproperty file="ivy.xml"/>
-	<property name="debug" value="false"/>
-	<property name="version" value="${ivy-module.info(revision)}"/>
+	<property name="project.debug" value="false"/>
+	<property name="project.version" value="${ivy-module.info(revision)}"/>
 
-	<path id="classpath">
+	<path id="project.classpath">
 		<pathelement location="bin"/>
 		<fileset dir="lib" excludes="*-javadoc.jar,*-sources.jar" includes="*.jar"/>
 	</path>

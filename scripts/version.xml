@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project>
 	<target name="version" description="Updates the version number in the sources.">
-		<replaceregexp file="README.md" match="project/v\d+(\.\d+){2}" replace="project/v${version}"/>
-		<replaceregexp file="etc/manifest.properties" match="Version: \d+(\.\d+){2}" replace="Version: ${version}"/>
+		<replaceregexp file="README.md" match="project/v\d+(\.\d+){2}" replace="project/v${project.version}"/>
+		<replaceregexp file="etc/manifest.properties" match="Version: \d+(\.\d+){2}" replace="Version: ${project.version}"/>
 	</target>
 </project>
