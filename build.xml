@@ -4,6 +4,11 @@
 	<property name="debug" value="false"/>
 	<property name="version" value="${ivy-module.info(revision)}"/>
 
+	<path id="classpath">
+		<pathelement location="bin"/>
+		<fileset dir="lib" includes="*.jar"/>
+ </path>
+
 	<import file="scripts/build.xml"/>
 	<import file="scripts/clean.xml"/>
 	<import file="scripts/dist.xml"/>
