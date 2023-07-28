@@ -1,17 +1,16 @@
 <?xml version="1.0"?>
 <project name="lcov" default="build" xmlns:ivy="antlib:org.apache.ivy.ant">
 	<xmlproperty file="ivy.xml"/>
-	<property name="project.debug" value="false"/>
-	<property name="project.version" value="${ivy-module.info(revision)}"/>
+	<property name="version" value="${ivy-module.info(revision)}"/>
 
-	<path id="project.classpath">
+	<path id="classpath">
 		<pathelement location="bin"/>
 		<fileset dir="lib" excludes="*-javadoc.jar,*-sources.jar" includes="*.jar"/>
 	</path>
 
 	<target name="build" description="Builds the project.">
 		<mkdir dir="bin"/>
-		<javac srcdir="src" destdir="bin" classpathref="project.classpath" debug="${project.debug}" includeantruntime="false">
+		<javac srcDir="src" destDir="bin" classPathRef="classpath" includeAntRuntime="false">
 			<compilerarg value="-Xlint:all,-path,-processing"/>
 		</javac>
 	</target>
@@ -25,16 +24,16 @@
 
 	<target name="dist" description="Packages the project." depends="clean,build,version">
 		<mkdir dir="bin/META-INF"/>
-		<copy file="LICENSE.md" todir="bin/META-INF"/>
-		<jar basedir="bin" destfile="bin/${ant.project.name}.jar" manifest="etc/manifest.properties"/>
+		<copy file="LICENSE.md" toDir="bin/META-INF"/>
+		<jar baseDir="bin" destFile="bin/${ant.project.name}.jar" manifest="etc/manifest.properties"/>
 	</target>
 
 	<target name="doc" description="Builds the documentation.">
-		<copy file="CHANGELOG.md" tofile="docs/changelog.md"/>
-		<copy file="LICENSE.md" tofile="docs/license.md"/>
+		<copy file="CHANGELOG.md" toFile="docs/changelog.md"/>
+		<copy file="LICENSE.md" toFile="docs/license.md"/>
 		<delete dir="docs/api"/>
-		<javadoc packagenames="io.belin.*" sourcepath="src" destdir="docs/api"/>
-		<copy file="docs/favicon.ico" todir="docs/api"/>
+		<javadoc packageNames="io.belin.*" sourcePath="src" destDir="docs/api"/>
+		<copy file="docs/favicon.ico" toDir="docs/api"/>
 	</target>
 
 	<target name="install" description="Installs the project dependencies.">
@@ -42,9 +41,19 @@
 		<ivy:retrieve log="download-only" sync="true"/>
 	</target>
 
-	<!-- TODO -->
 	<target name="lint" description="Performs the static analysis of source code." depends="build">
-		<property name="debug" value="true"/>
+		<java className="net.sourceforge.pmd.cli.PmdCli" classPathRef="classpath" failOnError="true" fork="true">
+			<arg value="cpd"/>
+			<arg value="--dir=example,src,test"/>
+			<arg value="--minimum-tokens=100"/>
+		</java>
+		<java className="net.sourceforge.pmd.cli.PmdCli" classPathRef="classpath" failOnError="true" fork="true">
+			<arg value="check"/>
+			<arg value="--cache=var/pmd.cache"/>
+			<arg value="--dir=example,src,test"/>
+			<arg value="--no-progress"/>
+			<arg value="--rulesets=etc/pmd.xml"/>
+		</java>
 	</target>
 
 	<target name="outdated" description="Checks whether installed packages are out of date.">
@@ -53,42 +62,30 @@
 
 	<target name="publish" description="Publishes the package." depends="dist">
 		<exec executable="git">
-			<arg line="tag v${project.version}"/>
+			<arg line="tag v${version}"/>
 		</exec>
 		<exec executable="git">
-			<arg line="push origin v${project.version}"/>
+			<arg line="push origin v${version}"/>
 		</exec>
 	</target>
 
 	<target name="run" description="Runs a main class from the &quot;example&quot; folder.">
 		<fail message="You must specify an example to run using -D:class=&lt;example&gt;." unless="class"/>
-		<java sourcefile="example/${class}.java" classpathref="project.classpath" failonerror="true" fork="true"/>
+		<java sourceFile="example/${class}.java" classPathRef="classpath" failOnError="true" fork="true"/>
 	</target>
 
 	<!-- TODO -->
 	<target name="test" description="Runs the test suite." depends="build">
-		<javac srcdir="test" destdir="bin" classpathref="project.classpath" debug="true" includeantruntime="false">
+		<javac srcDir="test" destDir="bin" classPathRef="classpath" includeAntRuntime="false">
 			<compilerarg value="-Xlint:all,-path,-processing"/>
 		</javac>
-		<java classname="org.junit.platform.console.ConsoleLauncher" classpathref="project.classpath" failonerror="true" fork="true">
+		<java className="org.junit.platform.console.ConsoleLauncher" classPathRef="classpath" failOnError="true" fork="true">
 			<arg value="--select-package=io.belin.${ant.project.name}"/>
 		</java>
-
-		<!-- TODO ?
-		<junitlauncher failureproperty="failure" printsummary="true">
-			<classpath refid="classpath"/>
-			<fork/>
-			<testclasses>
-				<fileset dir="bin" includes="**/*Test.class"/>
-				<listener type="legacy-plain" sendsyserr="true" sendsysout="true"/>
-			</testclasses>
-		</junitlauncher>
-		<fail if="${failure}"/>
-		-->
 	</target>
 
 	<target name="version" description="Updates the version number in the sources.">
-		<replaceregexp file="README.md" match="project/v\d+(\.\d+){2}" replace="project/v${project.version}"/>
-		<replaceregexp file="etc/manifest.properties" match="Version: \d+(\.\d+){2}" replace="Version: ${project.version}"/>
+		<replaceregexp file="README.md" match="project/v\d+(\.\d+){2}" replace="project/v${version}"/>
+		<replaceregexp file="etc/manifest.properties" match="Version: \d+(\.\d+){2}" replace="Version: ${version}"/>
 	</target>
 </project>
