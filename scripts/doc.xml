@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <project>
-	<!-- TODO -->
 	<target name="doc" description="Builds the documentation.">
 		<copy file="CHANGELOG.md" tofile="docs/changelog.md"/>
 		<copy file="LICENSE.md" tofile="docs/license.md"/>

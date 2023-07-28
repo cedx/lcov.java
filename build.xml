@@ -6,8 +6,8 @@
 
 	<path id="classpath">
 		<pathelement location="bin"/>
-		<fileset dir="lib" includes="*.jar"/>
- </path>
+		<fileset dir="lib" excludes="*-javadoc.jar,*-sources.jar" includes="*.jar"/>
+	</path>
 
 	<import file="scripts/build.xml"/>
 	<import file="scripts/clean.xml"/>

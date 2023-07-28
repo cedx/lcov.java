@@ -2,6 +2,23 @@
 <project>
 	<!-- TODO -->
 	<target name="test" description="Runs the test suite." depends="build">
-		<property name="debug" value="true"/>
+		<javac srcdir="test" destdir="bin" classpathref="classpath" debug="true" includeantruntime="false">
+			<compilerarg value="-Xlint:all,-path,-processing"/>
+		</javac>
+		<java classname="org.junit.platform.console.ConsoleLauncher" classpathref="classpath" failonerror="true" fork="true">
+			<arg value="--select-package=io.belin.${ant.project.name}"/>
+		</java>
+
+		<!-- TODO ?
+		<junitlauncher failureproperty="failure" printsummary="true">
+			<classpath refid="classpath"/>
+			<fork/>
+			<testclasses>
+				<fileset dir="bin" includes="**/*Test.class"/>
+				<listener type="legacy-plain" sendsyserr="true" sendsysout="true"/>
+			</testclasses>
+		</junitlauncher>
+		<fail if="${failure}"/>
+		-->
 	</target>
 </project>

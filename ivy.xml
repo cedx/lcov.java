@@ -14,6 +14,9 @@
 		<dependency org="org.eclipse" name="yasson" rev="3.0.3"/>
 		<dependency org="org.jacoco" name="org.jacoco.agent" rev="0.8.10"/>
 		<dependency org="org.jacoco" name="org.jacoco.cli" rev="0.8.10"/>
+		<dependency org="org.junit.jupiter" name="junit-jupiter" rev="5.10.0"/>
 		<dependency org="org.junit.platform" name="junit-platform-console-standalone" rev="1.10.0"/>
+		<dependency org="org.junit.platform" name="junit-platform-launcher" rev="1.10.0"/>
+		<dependency org="org.junit.platform" name="junit-platform-suite" rev="1.10.0"/>
 	</dependencies>
 </ivy-module>
