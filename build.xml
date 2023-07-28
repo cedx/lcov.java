@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
 <project name="lcov" default="build" xmlns:ivy="antlib:org.apache.ivy.ant">
 	<xmlproperty file="ivy.xml"/>
-	<property name="version" value="${ivy-module.info(revision)}"/>
+	<property name="project.description" value="LCOV Reports for Java"/>
+	<property name="project.version" value="${ivy-module.info(revision)}"/>
+
+	<description>${project.description} ${project.version}</description>
 
 	<path id="classpath">
 		<pathelement location="bin"/>
@@ -32,7 +35,7 @@
 		<copy file="CHANGELOG.md" toFile="docs/changelog.md"/>
 		<copy file="LICENSE.md" toFile="docs/license.md"/>
 		<delete dir="docs/api"/>
-		<javadoc packageNames="io.belin.*" sourcePath="src" destDir="docs/api"/>
+		<javadoc sourcePath="src" destDir="docs/api" packageNames="io.belin.*" windowTitle="${project.description}"/>
 		<copy file="docs/favicon.ico" toDir="docs/api"/>
 	</target>
 
@@ -62,10 +65,10 @@
 
 	<target name="publish" description="Publishes the package." depends="dist">
 		<exec executable="git">
-			<arg line="tag v${version}"/>
+			<arg line="tag v${project.version}"/>
 		</exec>
 		<exec executable="git">
-			<arg line="push origin v${version}"/>
+			<arg line="push origin v${project.version}"/>
 		</exec>
 	</target>
 
@@ -85,7 +88,7 @@
 	</target>
 
 	<target name="version" description="Updates the version number in the sources.">
-		<replaceregexp file="README.md" match="project/v\d+(\.\d+){2}" replace="project/v${version}"/>
-		<replaceregexp file="etc/manifest.properties" match="Version: \d+(\.\d+){2}" replace="Version: ${version}"/>
+		<replaceregexp file="README.md" match="project/v\d+(\.\d+){2}" replace="project/v${project.version}"/>
+		<replaceregexp file="etc/manifest.properties" match="Version: \d+(\.\d+){2}" replace="Version: ${project.version}"/>
 	</target>
 </project>
