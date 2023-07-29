@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="lcov" default="build" xmlns:ivy="antlib:org.apache.ivy.ant" xmlns:jacoco="antlib:org.jacoco.ant">
+<project name="lcov" default="build" xmlns:ivy="antlib:org.apache.ivy.ant">
 	<xmlproperty file="ivy.xml"/>
 	<property name="project.description" value="LCOV Reports for Java"/>
 	<property name="project.version" value="${ivy-module.info(revision)}"/>
@@ -22,7 +22,7 @@
 
 	<target name="clean" description="Deletes all generated files.">
 		<delete dir="bin"/>
-		<delete>
+		<delete includeEmptyDirs="true">
 			<fileset dir="var" excludes=".gitkeep"/>
 		</delete>
 	</target>
@@ -86,13 +86,13 @@
 		<javac srcDir="test" destDir="bin" classPathRef="project.classpath" includeAntRuntime="false">
 			<compilerarg value="-Xlint:all,-path,-processing"/>
 		</javac>
-		<taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml" classPathRef="project.classpath"/>
-		<jacoco:coverage destFile="var/jacoco.exec" append="false" includes="${vendor.id}.*">
+		<taskdef name="coverage" className="org.jacoco.ant.CoverageTask" classPathRef="project.classpath"/>
+		<coverage destFile="var/jacoco.exec" append="false" includes="${vendor.id}.*">
 			<java className="org.junit.platform.console.ConsoleLauncher" classPathRef="project.classpath" failOnError="true" fork="true">
 				<arg line="--select-package=${vendor.id}.${ant.project.name}"/>
 			</java>
-		</jacoco:coverage>
-		<delete>
+		</coverage>
+		<delete includeEmptyDirs="true">
 			<fileset dir="bin" includes="**/*Test.class"/>
 		</delete>
 		<java className="org.jacoco.cli.internal.Main" classPathRef="project.classpath" failOnError="true" fork="true">
