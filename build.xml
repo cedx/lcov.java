@@ -6,14 +6,14 @@
 
 	<description>${project.description} ${project.version}</description>
 
-	<path id="classpath">
+	<path id="project.classpath">
 		<pathelement location="bin"/>
 		<fileset dir="lib" excludes="*-javadoc.jar,*-sources.jar" includes="*.jar"/>
 	</path>
 
 	<target name="build" description="Builds the project.">
 		<mkdir dir="bin"/>
-		<javac srcDir="src" destDir="bin" classPathRef="classpath" includeAntRuntime="false">
+		<javac srcDir="src" destDir="bin" classPathRef="project.classpath" includeAntRuntime="false">
 			<compilerarg value="-Xlint:all,-path,-processing"/>
 		</javac>
 	</target>
@@ -45,10 +45,10 @@
 	</target>
 
 	<target name="lint" description="Performs the static analysis of source code." depends="build">
-		<java className="net.sourceforge.pmd.cli.PmdCli" classPathRef="classpath" failOnError="true" fork="true">
+		<java className="net.sourceforge.pmd.cli.PmdCli" classPathRef="project.classpath" failOnError="true" fork="true">
 			<arg line="cpd --dir=example,src,test --minimum-tokens=100"/>
 		</java>
-		<java className="net.sourceforge.pmd.cli.PmdCli" classPathRef="classpath" failOnError="true" fork="true">
+		<java className="net.sourceforge.pmd.cli.PmdCli" classPathRef="project.classpath" failOnError="true" fork="true">
 			<arg line="check --cache=var/pmd.cache --dir=example,src,test --no-progress --rulesets=etc/pmd.xml"/>
 		</java>
 	</target>
@@ -68,15 +68,15 @@
 
 	<target name="run" description="Runs a main class from the &quot;example&quot; folder.">
 		<fail message="You must specify an example to run using -D:class=&lt;example&gt;." unless="class"/>
-		<java sourceFile="example/${class}.java" classPathRef="classpath" failOnError="true" fork="true"/>
+		<java sourceFile="example/${class}.java" classPathRef="project.classpath" failOnError="true" fork="true"/>
 	</target>
 
 	<!-- TODO -->
 	<target name="test" description="Runs the test suite." depends="build">
-		<javac srcDir="test" destDir="bin" classPathRef="classpath" includeAntRuntime="false">
+		<javac srcDir="test" destDir="bin" classPathRef="project.classpath" includeAntRuntime="false">
 			<compilerarg value="-Xlint:all,-path,-processing"/>
 		</javac>
-		<java className="org.junit.platform.console.ConsoleLauncher" classPathRef="classpath" failOnError="true" fork="true">
+		<java className="org.junit.platform.console.ConsoleLauncher" classPathRef="project.classpath" failOnError="true" fork="true">
 			<arg line="--select-package=io.belin.${ant.project.name}"/>
 		</java>
 	</target>
