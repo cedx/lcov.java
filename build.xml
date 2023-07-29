@@ -1,8 +1,10 @@
 <?xml version="1.0"?>
-<project name="lcov" default="build" xmlns:ivy="antlib:org.apache.ivy.ant">
+<project name="lcov" default="build" xmlns:ivy="antlib:org.apache.ivy.ant" xmlns:jacoco="antlib:org.jacoco.ant">
 	<xmlproperty file="ivy.xml"/>
 	<property name="project.description" value="LCOV Reports for Java"/>
 	<property name="project.version" value="${ivy-module.info(revision)}"/>
+	<property name="vendor.id" value="io.belin"/>
+	<property name="vendor.name" value="Cédric Belin"/>
 
 	<description>${project.description} ${project.version}</description>
 
@@ -28,14 +30,21 @@
 	<target name="dist" description="Packages the project." depends="clean,build,version">
 		<mkdir dir="bin/META-INF"/>
 		<copy file="LICENSE.md" toDir="bin/META-INF"/>
-		<jar baseDir="bin" destFile="bin/${ant.project.name}.jar" manifest="etc/manifest.properties"/>
+		<jar baseDir="bin" destFile="bin/${ant.project.name}.jar">
+			<manifest>
+				<attribute name="Implementation-Title" value="${project.description}"/>
+				<attribute name="Implementation-Vendor" value="${vendor.name}"/>
+				<attribute name="Implementation-Vendor-Id" value="${vendor.id}"/>
+				<attribute name="Implementation-Version" value="${project.version}"/>
+			</manifest>
+		</jar>
 	</target>
 
 	<target name="doc" description="Builds the documentation.">
 		<copy file="CHANGELOG.md" toFile="docs/changelog.md"/>
 		<copy file="LICENSE.md" toFile="docs/license.md"/>
 		<delete dir="docs/api"/>
-		<javadoc sourcePath="src" destDir="docs/api" packageNames="io.belin.*" windowTitle="${project.description}"/>
+		<javadoc sourcePath="src" destDir="docs/api" packageNames="${vendor.id}.*" windowTitle="${project.description}"/>
 		<copy file="docs/favicon.ico" toDir="docs/api"/>
 	</target>
 
@@ -45,9 +54,11 @@
 	</target>
 
 	<target name="lint" description="Performs the static analysis of source code." depends="build">
-		<java className="net.sourceforge.pmd.cli.PmdCli" classPathRef="project.classpath" failOnError="true" fork="true">
-			<arg line="cpd --dir=example,src,test --minimum-tokens=100"/>
-		</java>
+		<taskdef name="cpd" className="net.sourceforge.pmd.ant.CPDTask" classPathRef="project.classpath"/>
+		<cpd minimumTokenCount="100">
+			<fileset dir="src"/>
+			<fileset dir="test"/>
+		</cpd>
 		<java className="net.sourceforge.pmd.cli.PmdCli" classPathRef="project.classpath" failOnError="true" fork="true">
 			<arg line="check --cache=var/pmd.cache --dir=example,src,test --no-progress --rulesets=etc/pmd.xml"/>
 		</java>
@@ -71,13 +82,21 @@
 		<java sourceFile="example/${class}.java" classPathRef="project.classpath" failOnError="true" fork="true"/>
 	</target>
 
-	<!-- TODO -->
 	<target name="test" description="Runs the test suite." depends="build">
 		<javac srcDir="test" destDir="bin" classPathRef="project.classpath" includeAntRuntime="false">
 			<compilerarg value="-Xlint:all,-path,-processing"/>
 		</javac>
-		<java className="org.junit.platform.console.ConsoleLauncher" classPathRef="project.classpath" failOnError="true" fork="true">
-			<arg line="--select-package=io.belin.${ant.project.name}"/>
+		<taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml" classPathRef="project.classpath"/>
+		<jacoco:coverage destFile="var/jacoco.exec" append="false" includes="${vendor.id}.*">
+			<java className="org.junit.platform.console.ConsoleLauncher" classPathRef="project.classpath" failOnError="true" fork="true">
+				<arg line="--select-package=${vendor.id}.${ant.project.name}"/>
+			</java>
+		</jacoco:coverage>
+		<delete>
+			<fileset dir="bin" includes="**/*Test.class"/>
+		</delete>
+		<java className="org.jacoco.cli.internal.Main" classPathRef="project.classpath" failOnError="true" fork="true">
+			<arg line="report var/jacoco.exec --classfiles=bin --sourcefiles=src --xml=var/coverage.xml"/>
 		</java>
 	</target>
 
