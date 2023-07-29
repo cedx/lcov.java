@@ -13,6 +13,9 @@
 		<fileset dir="lib" excludes="*-javadoc.jar,*-sources.jar" includes="*.jar"/>
 	</path>
 
+	<taskdef name="coverage" className="org.jacoco.ant.CoverageTask" classPathRef="project.classpath"/>
+	<taskdef name="cpd" className="net.sourceforge.pmd.ant.CPDTask" classPathRef="project.classpath"/>
+
 	<target name="build" description="Builds the project.">
 		<mkdir dir="bin"/>
 		<javac srcDir="src" destDir="bin" classPathRef="project.classpath" includeAntRuntime="false">
@@ -54,7 +57,6 @@
 	</target>
 
 	<target name="lint" description="Performs the static analysis of source code." depends="build">
-		<taskdef name="cpd" className="net.sourceforge.pmd.ant.CPDTask" classPathRef="project.classpath"/>
 		<cpd minimumTokenCount="100">
 			<fileset dir="src"/>
 			<fileset dir="test"/>
@@ -86,7 +88,6 @@
 		<javac srcDir="test" destDir="bin" classPathRef="project.classpath" includeAntRuntime="false">
 			<compilerarg value="-Xlint:all,-path,-processing"/>
 		</javac>
-		<taskdef name="coverage" className="org.jacoco.ant.CoverageTask" classPathRef="project.classpath"/>
 		<coverage destFile="var/jacoco.exec" append="false" includes="${vendor.id}.*">
 			<java className="org.junit.platform.console.ConsoleLauncher" classPathRef="project.classpath" failOnError="true" fork="true">
 				<arg line="--select-package=${vendor.id}.${ant.project.name}"/>
