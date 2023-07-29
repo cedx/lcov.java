@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <project name="lcov" default="build" xmlns:ivy="antlib:org.apache.ivy.ant">
 	<xmlproperty file="ivy.xml"/>
-	<property name="project.description" value="LCOV Reports for Java"/>
+	<property name="project.title" value="LCOV Reports for Java"/>
 	<property name="project.version" value="${ivy-module.info(revision)}"/>
 	<property name="vendor.id" value="io.belin"/>
 	<property name="vendor.name" value="Cédric Belin"/>
 
-	<description>${project.description} ${project.version}</description>
+	<description>${project.title} ${project.version}</description>
 
 	<path id="project.classpath">
 		<pathelement location="bin"/>
@@ -32,7 +32,7 @@
 		<copy file="LICENSE.md" toDir="bin/META-INF"/>
 		<jar baseDir="bin" destFile="bin/${ant.project.name}.jar">
 			<manifest>
-				<attribute name="Implementation-Title" value="${project.description}"/>
+				<attribute name="Implementation-Title" value="${project.title}"/>
 				<attribute name="Implementation-Vendor" value="${vendor.name}"/>
 				<attribute name="Implementation-Vendor-Id" value="${vendor.id}"/>
 				<attribute name="Implementation-Version" value="${project.version}"/>
@@ -44,7 +44,7 @@
 		<copy file="CHANGELOG.md" toFile="docs/changelog.md"/>
 		<copy file="LICENSE.md" toFile="docs/license.md"/>
 		<delete dir="docs/api"/>
-		<javadoc sourcePath="src" destDir="docs/api" packageNames="${vendor.id}.*" windowTitle="${project.description}"/>
+		<javadoc sourcePath="src" destDir="docs/api" packageNames="${vendor.id}.*" windowTitle="${project.title}"/>
 		<copy file="docs/favicon.ico" toDir="docs/api"/>
 	</target>
 
@@ -102,6 +102,5 @@
 
 	<target name="version" description="Updates the version number in the sources.">
 		<replaceregexp file="README.md" match="project/v\d+(\.\d+){2}" replace="project/v${project.version}"/>
-		<replaceregexp file="etc/manifest.properties" match="Version: \d+(\.\d+){2}" replace="Version: ${project.version}"/>
 	</target>
 </project>
