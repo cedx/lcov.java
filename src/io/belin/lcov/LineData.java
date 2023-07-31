@@ -26,7 +26,7 @@ public class LineData {
 	 * Creates new line data.
 	 */
 	public LineData() {
-		this(0, 0);
+		this(0, 0, null);
 	}
 
 	/**

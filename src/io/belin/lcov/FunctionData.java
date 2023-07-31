@@ -26,7 +26,15 @@ public class FunctionData {
 	 * Creates new function data.
 	 */
 	public FunctionData() {
-		this(null, 0, 0);
+		this("", 0, 0);
+	}
+
+	/**
+	 * Creates new function data.
+	 * @param functionName The function name.
+	 */
+	public FunctionData(String functionName) {
+		this(functionName, 0, 0);
 	}
 
 	/**
@@ -37,7 +45,7 @@ public class FunctionData {
 	 */
 	public FunctionData(String functionName, int lineNumber, int executionCount) {
 		this.executionCount = executionCount;
-		this.functionName = Objects.requireNonNullElse(functionName, "");
+		this.functionName = Objects.requireNonNull(functionName);
 		this.lineNumber = lineNumber;
 	}
 

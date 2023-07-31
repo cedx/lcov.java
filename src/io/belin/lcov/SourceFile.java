@@ -33,7 +33,7 @@ public class SourceFile {
 	 * Creates a new source file.
 	 */
 	public SourceFile() {
-		this(null);
+		this(Path.of(""), null, null, null);
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class SourceFile {
 		this.branches = branches;
 		this.functions = functions;
 		this.lines = lines;
-		this.path = Objects.requireNonNullElse(path, Path.of(""));
+		this.path = Objects.requireNonNull(path);
 	}
 
 	/**

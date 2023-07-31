@@ -28,7 +28,7 @@ public class Report {
 	 * Creates a new report.
 	 */
 	public Report() {
-		this(null);
+		this("", null);
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class Report {
 	 */
 	public Report(String testName, List<SourceFile> sourceFiles) {
 		this.sourceFiles = new ArrayList<>(Objects.requireNonNullElse(sourceFiles, Collections.emptyList()));
-		this.testName = Objects.requireNonNullElse(testName, "");
+		this.testName = Objects.requireNonNull(testName);
 	}
 
 	/**

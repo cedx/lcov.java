@@ -31,7 +31,7 @@ public class BranchCoverage {
 	 * Creates a new branch coverage.
 	 */
 	public BranchCoverage() {
-		this(0, 0);
+		this(0, 0, null);
 	}
 
 	/**

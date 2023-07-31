@@ -31,7 +31,7 @@ public class FunctionCoverage {
 	 * Creates a new function coverage.
 	 */
 	public FunctionCoverage() {
-		this(0, 0);
+		this(0, 0, null);
 	}
 
 	/**

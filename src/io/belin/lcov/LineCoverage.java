@@ -31,7 +31,7 @@ public class LineCoverage {
 	 * Creates a new line coverage.
 	 */
 	public LineCoverage() {
-		this(0, 0);
+		this(0, 0, null);
 	}
 
 	/**
