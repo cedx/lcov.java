@@ -1,10 +1,10 @@
-import java.nio.file.Path;
-import java.util.List;
 import io.belin.lcov.FunctionCoverage;
 import io.belin.lcov.LineCoverage;
 import io.belin.lcov.LineData;
 import io.belin.lcov.Report;
 import io.belin.lcov.SourceFile;
+import java.nio.file.Path;
+import java.util.List;
 
 /**
  * Formats coverage data as LCOV report.
