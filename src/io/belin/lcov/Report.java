@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -53,32 +54,28 @@ public class Report {
 	 * Parses the specified coverage data in LCOV format.
 	 * @param coverage The coverage data.
 	 * @return The resulting coverage report.
-	 * @throws IllegalArgumentException A parsing error occurred.
 	 */
 	@SuppressWarnings({"PMD.CognitiveComplexity", "PMD.CyclomaticComplexity", "PMD.NPathComplexity"})
-	public static Report parse(String coverage) {
-		int offset = 0;
+	public static Optional<Report> parse(String coverage) {
 		var report = new Report();
 		var sourceFile = new SourceFile();
 
 		for (var line: coverage.split("\\r?\\n")) {
-			offset++;
 			if (line.isBlank()) continue;
 
 			var parts = line.trim().split(":");
-			if (parts.length < 2 && !parts[0].equals(Token.EndOfRecord.toString()))
-				throw new IllegalArgumentException("Invalid token format at line #%d.".formatted(offset));
+			if (parts.length < 2 && !parts[0].equals(Token.EndOfRecord.toString())) return Optional.empty();
 
 			var data = String.join(":", Arrays.copyOfRange(parts, 1, parts.length)).split(",");
 			var token = Token.from(parts[0]);
-			if (token.isEmpty()) throw new IllegalArgumentException("Unknown token at line #%d.".formatted(offset));
+			if (token.isEmpty()) return Optional.empty();
 
 			switch (token.get()) {
 				case TestName -> { if (report.testName.isEmpty()) report.testName = data[0]; }
 				case EndOfRecord -> report.sourceFiles.add(sourceFile);
 
 				case BranchData -> {
-					if (data.length < 4) throw new IllegalArgumentException("Invalid branch data at line #%d.".formatted(offset));
+					if (data.length < 4) return Optional.empty();
 					if (sourceFile.branches != null) sourceFile.branches.data.add(new BranchData(
 						Integer.parseInt(data[0]),
 						Integer.parseInt(data[1]),
@@ -88,7 +85,7 @@ public class Report {
 				}
 
 				case FunctionData -> {
-					if (data.length < 2) throw new IllegalArgumentException("Invalid function data at line #%d.".formatted(offset));
+					if (data.length < 2) return Optional.empty();
 					if (sourceFile.functions != null) for (var item: sourceFile.functions.data) if (item.functionName.equals(data[1])) {
 						item.executionCount = Integer.parseInt(data[0]);
 						break;
@@ -96,12 +93,12 @@ public class Report {
 				}
 
 				case FunctionName -> {
-					if (data.length < 2) throw new IllegalArgumentException("Invalid function name at line #%d.".formatted(offset));
+					if (data.length < 2) return Optional.empty();
 					if (sourceFile.functions != null) sourceFile.functions.data.add(new FunctionData(data[1], Integer.parseInt(data[0]), 0));
 				}
 
 				case LineData -> {
-					if (data.length < 2) throw new IllegalArgumentException("Invalid line data at line #%d.".formatted(offset));
+					if (data.length < 2) return Optional.empty();
 					if (sourceFile.lines != null) sourceFile.lines.data.add(new LineData(
 						Integer.parseInt(data[0]),
 						Integer.parseInt(data[1]),
@@ -119,8 +116,7 @@ public class Report {
 			}
 		}
 
-		if (report.sourceFiles.isEmpty()) throw new IllegalArgumentException("The coverage data is empty or invalid.");
-		return report;
+		return report.sourceFiles.isEmpty() ? Optional.empty() : Optional.of(report);
 	}
 
 	/**

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ final class ReportTest {
 	@Test
 	@DisplayName("parse()")
 	void parse() throws IOException {
-		var report = Report.parse(Files.readString(Path.of("share/lcov.info")));
+		var report = Report.parse(Files.readString(Path.of("share/lcov.info"))).get();
 
 		// It should have a test name.
 		assertEquals("Example", report.testName);
@@ -49,8 +50,8 @@ final class ReportTest {
 		assertEquals(9, lines.hit);
 		assertEquals("5kX7OTfHFcjnS98fjeVqNA", lines.data.get(0).checksum);
 
-		// It should throw an exception if the report is invalid or empty.
-		assertThrows(IllegalArgumentException.class, () -> Report.parse("TN:Example"));
+		// It should an empty result if the report is invalid or empty.
+		assertEquals(Optional.empty(), Report.parse("TN:Example"));
 	}
 
 	@Test

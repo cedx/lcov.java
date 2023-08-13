@@ -17,13 +17,12 @@ class ParseReport {
 	 */
 	@SuppressWarnings("PMD.SystemPrintln")
 	public static void main(String... args) throws IOException {
-		try {
-			var report = Report.parse(Files.readString(Path.of("share/lcov.info")));
+		var result = Report.parse(Files.readString(Path.of("share/lcov.info")));
+		if (result.isEmpty()) System.err.println("The coverage data is empty or invalid.");
+		else {
+			var report = result.get();
 			System.out.printf("The coverage report contains %d source files:%n", report.sourceFiles.size());
 			System.out.println(JsonbBuilder.create(new JsonbConfig().withFormatting(true)).toJson(report));
-		}
-		catch (IllegalArgumentException e) {
-			System.err.println(e.getMessage());
 		}
 	}
 }
