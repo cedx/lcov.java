@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-class ParseReport {
+class Program {
   public static void main(String... args) throws IOException {
     var result = Report.parse(Files.readString(Path.of("share/lcov.info")));
     if (result.isEmpty()) System.err.println("The coverage data is empty or invalid.");
