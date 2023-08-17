@@ -1,6 +1,7 @@
 # LCOV parsing
 The `Report.parse()` static method parses a [LCOV](https://github.com/linux-test-project/lcov) coverage report provided as string,
-and returns an `Outcome<Report, Error>`. The `Report` instance gives detailed information about the provided coverage report:
+and returns an [`Optional<Report>`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html).
+The `Report` instance gives detailed information about the provided coverage report:
 
 ```java
 import io.belin.lcov.Report;

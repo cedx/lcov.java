@@ -6,7 +6,11 @@ in [Java](https://www.java.com).
 Download the latest JAR file of **LCOV Reports for Java** from the GitHub releases:  
 https://github.com/cedx/lcov.java/releases/latest
 
-For detailed instructions, see the [installation guide](installation.md).
+Add it to your class path. Now in your [Java](https://www.java.com) code, you can use:
+
+```java
+import io.belin.lcov.*;
+```
 
 ## Usage
 This library provides a set of classes representing a [LCOV](https://github.com/linux-test-project/lcov) coverage report and its data.

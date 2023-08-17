@@ -1,4 +1,3 @@
-- [Installation](installation.md)
 - Usage
 	- [LCOV parsing](usage/parsing.md)
 	- [LCOV formatting](usage/formatting.md)
