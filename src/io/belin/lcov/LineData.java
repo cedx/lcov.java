@@ -32,6 +32,14 @@ public class LineData {
 	/**
 	 * Creates new line data.
 	 * @param lineNumber The line number.
+	 */
+	public LineData(int lineNumber) {
+		this(lineNumber, 0, null);
+	}
+
+	/**
+	 * Creates new line data.
+	 * @param lineNumber The line number.
 	 * @param executionCount The execution count.
 	 */
 	public LineData(int lineNumber, int executionCount) {

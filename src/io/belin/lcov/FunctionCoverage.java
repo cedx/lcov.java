@@ -45,6 +45,14 @@ public class FunctionCoverage {
 
 	/**
 	 * Creates a new function coverage.
+	 * @param data The coverage data.
+	 */
+	public FunctionCoverage(List<FunctionData> data) {
+		this(0, 0, data);
+	}
+
+	/**
+	 * Creates a new function coverage.
 	 * @param found The number of functions found.
 	 * @param hit The number of functions hit.
 	 * @param data The coverage data.

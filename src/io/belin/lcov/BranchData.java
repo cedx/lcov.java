@@ -35,6 +35,14 @@ public class BranchData {
 	/**
 	 * Creates new branch data.
 	 * @param lineNumber The line number.
+	 */
+	public BranchData(int lineNumber) {
+		this(lineNumber, 0, 0, 0);
+	}
+
+	/**
+	 * Creates new branch data.
+	 * @param lineNumber The line number.
 	 * @param blockNumber The block number.
 	 * @param branchNumber The branch number.
 	 */

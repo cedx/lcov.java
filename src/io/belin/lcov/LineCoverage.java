@@ -45,6 +45,14 @@ public class LineCoverage {
 
 	/**
 	 * Creates a new line coverage.
+	 * @param data The coverage data.
+	 */
+	public LineCoverage(List<LineData> data) {
+		this(0, 0, data);
+	}
+
+	/**
+	 * Creates a new line coverage.
 	 * @param found The number of lines found.
 	 * @param hit The number of lines hit.
 	 * @param data The coverage data.

@@ -41,6 +41,15 @@ public class FunctionData {
 	 * Creates new function data.
 	 * @param functionName The function name.
 	 * @param lineNumber The line number of the function start.
+	 */
+	public FunctionData(String functionName, int lineNumber) {
+		this(functionName, lineNumber, 0);
+	}
+
+	/**
+	 * Creates new function data.
+	 * @param functionName The function name.
+	 * @param lineNumber The line number of the function start.
 	 * @param executionCount The execution count.
 	 */
 	public FunctionData(String functionName, int lineNumber, int executionCount) {

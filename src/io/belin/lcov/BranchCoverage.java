@@ -45,6 +45,14 @@ public class BranchCoverage {
 
 	/**
 	 * Creates a new branch coverage.
+	 * @param data The coverage data.
+	 */
+	public BranchCoverage(List<BranchData> data) {
+		this(0, 0, data);
+	}
+
+	/**
+	 * Creates a new branch coverage.
 	 * @param found The number of branches found.
 	 * @param hit The number of branches hit.
 	 * @param data The coverage data.
