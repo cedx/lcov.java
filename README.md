@@ -5,12 +5,12 @@ Parse and format [LCOV](https://github.com/linux-test-project/lcov) coverage rep
 in [Java](https://www.oracle.com/java).
 
 ## Documentation
-- [User guide](https://docs.belin.io/lcov.java)
-- [API reference](https://docs.belin.io/lcov.java/api)
+- [User guide](https://cedx.github.io/lcov.java)
+- [API reference](https://cedx.github.io/lcov.java/api)
 
 ## Development
 - [Git repository](https://github.com/cedx/lcov.java)
 - [Submit an issue](https://github.com/cedx/lcov.java/issues)
 
 ## License
-[LCOV Reports for Java](https://docs.belin.io/lcov.java) is distributed under the MIT License.
+[LCOV Reports for Java](https://cedx.github.io/lcov.java) is distributed under the MIT License.
