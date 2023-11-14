@@ -13,4 +13,4 @@ in [Java](https://www.oracle.com/java).
 - [Submit an issue](https://github.com/cedx/lcov.java/issues)
 
 ## License
-[LCOV Reports for Java](https://cedx.github.io/lcov.java) is distributed under the MIT License.
+[LCOV Reports for Java](https://github.com/cedx/lcov.java) is distributed under the MIT License.
