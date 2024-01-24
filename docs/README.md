@@ -22,4 +22,3 @@ The `Report` class, the main one, provides the parsing and formatting features.
 ## See also
 - [API reference](api/)
 - [GitHub releases](https://github.com/cedx/lcov.java/releases)
-- [Code coverage](https://app.codecov.io/gh/cedx/lcov.java)
