@@ -19,6 +19,6 @@ final class LineCoverageTest {
 
 		var data = new LineData(127, 3);
 		var coverage = new LineCoverage(23, 11, List.of(data));
-		assertEquals((data.toString() + "{eol}LF:23{eol}LH:11").replace("{eol}", eol), coverage.toString());
+		assertEquals((data + "{eol}LF:23{eol}LH:11").replace("{eol}", eol), coverage.toString());
 	}
 }

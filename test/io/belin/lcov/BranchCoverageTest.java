@@ -19,6 +19,6 @@ final class BranchCoverageTest {
 
 		var data = new BranchData(127, 3, 2, 1);
 		var coverage = new BranchCoverage(23, 11, List.of(data));
-		assertEquals((data.toString() + "{eol}BRF:23{eol}BRH:11").replace("{eol}", eol), coverage.toString());
+		assertEquals((data + "{eol}BRF:23{eol}BRH:11").replace("{eol}", eol), coverage.toString());
 	}
 }

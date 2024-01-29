@@ -34,21 +34,21 @@ final class ReportTest {
 		assertEquals(4, branches.data.size());
 		assertEquals(4, branches.found);
 		assertEquals(4, branches.hit);
-		assertEquals(8, branches.data.get(0).lineNumber);
+		assertEquals(8, branches.data.getFirst().lineNumber);
 
 		// It should have detailed function coverage.
 		var functions = report.sourceFiles.get(1).functions;
 		assertEquals(1, functions.data.size());
 		assertEquals(1, functions.found);
 		assertEquals(1, functions.hit);
-		assertEquals("func1", functions.data.get(0).functionName);
+		assertEquals("func1", functions.data.getFirst().functionName);
 
 		// It should have detailed line coverage.
 		var lines = report.sourceFiles.get(1).lines;
 		assertEquals(9, lines.data.size());
 		assertEquals(9, lines.found);
 		assertEquals(9, lines.hit);
-		assertEquals("5kX7OTfHFcjnS98fjeVqNA", lines.data.get(0).checksum);
+		assertEquals("5kX7OTfHFcjnS98fjeVqNA", lines.data.getFirst().checksum);
 
 		// It should an empty result if the report is invalid or empty.
 		assertEquals(Optional.empty(), Report.parse("TN:Example"));

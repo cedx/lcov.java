@@ -1,7 +1,6 @@
 import io.belin.lcov.Report;
 import jakarta.json.bind.JsonbBuilder;
 import jakarta.json.bind.JsonbConfig;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -16,13 +15,15 @@ class ParseReport {
 	 * @param args The command line arguments.
 	 */
 	@SuppressWarnings("PMD.SystemPrintln")
-	public static void main(String... args) throws IOException {
+	public static void main(String... args) throws Exception {
 		var result = Report.parse(Files.readString(Path.of("share/lcov.info")));
 		if (result.isEmpty()) System.err.println("The coverage data is empty or invalid.");
 		else {
 			var report = result.get();
 			System.out.printf("The coverage report contains %d source files:%n", report.sourceFiles.size());
-			System.out.println(JsonbBuilder.create(new JsonbConfig().withFormatting(true)).toJson(report));
+			try (var builder = JsonbBuilder.create(new JsonbConfig().withFormatting(true))) {
+				System.out.println(builder.toJson(report));
+			}
 		}
 	}
 }
