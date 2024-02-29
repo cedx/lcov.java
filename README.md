@@ -5,8 +5,8 @@ Parse and format [LCOV](https://github.com/linux-test-project/lcov) coverage rep
 in [Java](https://www.oracle.com/java).
 
 ## Documentation
-- [User guide](https://cedx.github.io/lcov.java)
-- [API reference](https://cedx.github.io/lcov.java/api)
+- [User guide](https://docs.belin.io/lcov.java)
+- [API reference](https://docs.belin.io/lcov.java/api)
 
 ## Development
 - [Git repository](https://github.com/cedx/lcov.java)
