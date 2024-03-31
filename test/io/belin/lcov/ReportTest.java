@@ -18,7 +18,7 @@ final class ReportTest {
 	@Test
 	@DisplayName("parse()")
 	void parse() throws IOException {
-		var report = Report.parse(Files.readString(Path.of("share/lcov.info"))).get();
+		var report = Report.parse(Files.readString(Path.of("res/lcov.info"))).get();
 
 		// It should have a test name.
 		assertEquals("Example", report.testName);

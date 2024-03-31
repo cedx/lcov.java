@@ -16,7 +16,7 @@ class ParseReport {
 	 */
 	@SuppressWarnings("PMD.SystemPrintln")
 	public static void main(String... args) throws Exception {
-		var result = Report.parse(Files.readString(Path.of("share/lcov.info")));
+		var result = Report.parse(Files.readString(Path.of("res/lcov.info")));
 		if (result.isEmpty()) System.err.println("The coverage data is empty or invalid.");
 		else {
 			var report = result.get();

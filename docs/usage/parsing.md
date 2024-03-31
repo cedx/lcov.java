@@ -13,7 +13,7 @@ import java.nio.file.Path;
 
 class Program {
   public static void main(String... args) throws Exception {
-    var result = Report.parse(Files.readString(Path.of("share/lcov.info")));
+    var result = Report.parse(Files.readString(Path.of("/path/to/lcov.info")));
     if (result.isEmpty()) System.err.println("The coverage data is empty or invalid.");
     else {
       var report = result.get();
