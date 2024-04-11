@@ -19,8 +19,8 @@ class Program {
       var report = result.get();
       System.out.printf("The coverage report contains %d source files:%n", report.sourceFiles.size());
       try (var builder = JsonbBuilder.create(new JsonbConfig().withFormatting(true))) {
-				System.out.println(builder.toJson(report));
-			}
+        System.out.println(builder.toJson(report));
+      }
     }
   }
 }
@@ -59,4 +59,5 @@ Converting the `Report` instance to [JSON](https://www.json.org) format will ret
 }
 ```
 
-> See the [API reference](api/) of this library for more information on the `Report` class.
+!!! tip
+    See the [API reference](../api/) of this library for more information on the `Report` class.

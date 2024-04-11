@@ -1,6 +1,0 @@
-- Usage
-	- [LCOV parsing](usage/parsing.md)
-	- [LCOV formatting](usage/formatting.md)
-- [API reference](api/)
-- [Changelog](changelog.md)
-- [License](license.md)
