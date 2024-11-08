@@ -91,7 +91,7 @@ public enum Token {
 	 * @param id A string specifying a token identifier.
 	 * @return The optional token corresponding to the specified identifier.
 	 */
-	public static Optional<Token> from(String id) {
+	public static Optional<Token> of(String id) {
 		return Arrays.stream(values()).filter(value -> value.id.equals(id)).findFirst();
 	}
 

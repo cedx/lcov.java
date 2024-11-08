@@ -67,7 +67,7 @@ public class Report {
 			if (parts.length < 2 && !parts[0].equals(Token.EndOfRecord.toString())) return Optional.empty();
 
 			var data = String.join(":", Arrays.copyOfRange(parts, 1, parts.length)).split(",");
-			var token = Token.from(parts[0]);
+			var token = Token.of(parts[0]);
 			if (token.isEmpty()) return Optional.empty();
 
 			switch (token.get()) {
